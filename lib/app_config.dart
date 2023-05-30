@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:aleteo_arquetipo/modules/buttons/ui/pages/buttons_home_page.dart';
+
 import 'blocs/bloc_drawer.dart';
 import 'blocs/bloc_processing.dart';
 import 'blocs/bloc_responsive.dart';
@@ -8,6 +10,7 @@ import 'blocs/navigator_bloc.dart';
 import 'blocs/onboarding_bloc.dart';
 import 'blocs/theme_bloc.dart';
 import 'entities/entity_bloc.dart';
+import 'modules/buttons/blocs/button_bloc.dart';
 import 'modules/demo/blocs/bloc_demo.dart';
 import 'modules/demo/ui/pages/demo_home_page.dart';
 import 'providers/my_app_navigator_provider.dart';
@@ -46,6 +49,19 @@ FutureOr<void> demoInsert(BlocCore<dynamic> blocCoreInt) async {
       .setTitle('Demo Home');
 }
 
+FutureOr<void> buttonsBlocInsert(BlocCore<dynamic> blocCoreInt) async {
+  blocCoreInt
+      .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
+      .setHomePageAndUpdate(
+        ButtonsHomePage(
+          buttonBloc: blocCoreInt.getBlocModule<ButtonBloc>(ButtonBloc.name),
+        ),
+      );
+  blocCoreInt
+      .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
+      .setTitle('Button Page');
+}
+
 Future<void> onboarding({
   BlocCore<dynamic>? blocCoreExt,
   Duration initialDelay = const Duration(seconds: 2),
@@ -68,30 +84,42 @@ Future<void> onboarding({
     );
 
     // Inyectamos el demo
+    // blocCoreInt.addBlocModule(
+    //   BlocDemo.name,
+    //   BlocDemo(
+    //     drawerMainMenuBloc: blocCoreInt
+    //         .getBlocModule<DrawerMainMenuBloc>(DrawerMainMenuBloc.name),
+    //     drawerSecondaryMenuBloc:
+    //         blocCoreInt.getBlocModule<DrawerSecondaryMenuBloc>(
+    //       DrawerSecondaryMenuBloc.name,
+    //     ),
+    //   ),
+    // );
+    // blocCoreInt.addBlocModule(
+    //   OnboardingBloc.name,
+    //   OnboardingBloc(
+    //     <FutureOr<void> Function()>[
+    //       testMe,
+    //       testMe,
+    //       testMe,
+    //       () async {
+    //         await demoInsert(blocCoreInt);
+    //       }
+    //     ],
+    //   ),
+    // );
+
+    blocCoreInt.addBlocModule(ButtonBloc.name, ButtonBloc());
     blocCoreInt.addBlocModule(
-      BlocDemo.name,
-      BlocDemo(
-        drawerMainMenuBloc: blocCoreInt
-            .getBlocModule<DrawerMainMenuBloc>(DrawerMainMenuBloc.name),
-        drawerSecondaryMenuBloc:
-            blocCoreInt.getBlocModule<DrawerSecondaryMenuBloc>(
-          DrawerSecondaryMenuBloc.name,
-        ),
-      ),
-    );
-    blocCoreInt.addBlocModule(
-      OnboardingBloc.name,
-      OnboardingBloc(
-        <FutureOr<void> Function()>[
-          testMe,
-          testMe,
-          testMe,
-          () async {
-            await demoInsert(blocCoreInt);
-          }
-        ],
-      ),
-    );
+        OnboardingBloc.name,
+        OnboardingBloc(
+          <FutureOr<void> Function()>[
+            testMe,
+            () async {
+              await buttonsBlocInsert(blocCoreInt);
+            }
+          ],
+        ));
 // redirigimos al onboarding
     blocCoreInt
         .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
