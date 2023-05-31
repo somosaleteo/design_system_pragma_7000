@@ -1,7 +1,6 @@
 import 'package:aleteo_arquetipo/app_config.dart';
 import 'package:aleteo_arquetipo/blocs/navigator_bloc.dart';
 import 'package:aleteo_arquetipo/modules/show_case/blocs/show_case_bloc.dart';
-import 'package:aleteo_arquetipo/modules/show_case/ui/pages/button_detail.dart';
 import 'package:aleteo_arquetipo/modules/show_case/ui/pages/template_show_case_page.dart';
 import 'package:aleteo_arquetipo/ui/widgets/responsive/my_app_scaffold_widget.dart';
 import 'package:flutter/material.dart';
