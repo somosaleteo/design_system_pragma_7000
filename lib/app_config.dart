@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:aleteo_arquetipo/modules/buttons/ui/pages/buttons_home_page.dart';
+import 'package:aleteo_arquetipo/modules/show_case/ui/pages/show_case_home_page.dart';
 
 import 'blocs/bloc_drawer.dart';
 import 'blocs/bloc_processing.dart';
@@ -10,7 +10,7 @@ import 'blocs/navigator_bloc.dart';
 import 'blocs/onboarding_bloc.dart';
 import 'blocs/theme_bloc.dart';
 import 'entities/entity_bloc.dart';
-import 'modules/buttons/blocs/button_bloc.dart';
+import 'modules/show_case/blocs/show_case_bloc.dart';
 import 'modules/demo/blocs/bloc_demo.dart';
 import 'modules/demo/ui/pages/demo_home_page.dart';
 import 'providers/my_app_navigator_provider.dart';
@@ -53,8 +53,8 @@ FutureOr<void> buttonsBlocInsert(BlocCore<dynamic> blocCoreInt) async {
   blocCoreInt
       .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
       .setHomePageAndUpdate(
-        ButtonsHomePage(
-          buttonBloc: blocCoreInt.getBlocModule<ButtonBloc>(ButtonBloc.name),
+        ShowCaseHomePage(
+          buttonBloc: blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
         ),
       );
   blocCoreInt
@@ -109,7 +109,7 @@ Future<void> onboarding({
     //   ),
     // );
 
-    blocCoreInt.addBlocModule(ButtonBloc.name, ButtonBloc());
+    blocCoreInt.addBlocModule(ShowCaseBloc.name, ShowCaseBloc());
     blocCoreInt.addBlocModule(
         OnboardingBloc.name,
         OnboardingBloc(
