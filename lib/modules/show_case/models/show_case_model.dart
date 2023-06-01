@@ -1,12 +1,33 @@
+import 'package:aleteo_arquetipo/modules/show_case/abstractions/artifact.dart';
+import 'package:aleteo_arquetipo/modules/show_case/abstractions/code_artifact.dart';
+import 'package:aleteo_arquetipo/modules/show_case/abstractions/properties_artifact.dart';
+
 import '../../../entities/entity_model.dart';
 
 class ShowCaseModel extends EntityModel {
-  const ShowCaseModel({required this.title});
+  const ShowCaseModel({
+    required this.title,
+    required this.artifact,
+    required this.codeArtifact,
+    required this.propertiesArtifact,
+  });
   final String title;
+  final Artifact artifact;
+  final CodeArtifact codeArtifact;
+  final PropertiesArtifact propertiesArtifact;
 
   @override
-  ShowCaseModel copyWith({String? title}) {
-    return ShowCaseModel(title: title ?? this.title);
+  ShowCaseModel copyWith({
+    String? title,
+    Artifact? artifact,
+    CodeArtifact? codeArtifact,
+    PropertiesArtifact? propertiesArtifact,
+  }) {
+    return ShowCaseModel(
+        title: title ?? this.title,
+        artifact: artifact ?? this.artifact,
+        codeArtifact: codeArtifact ?? this.codeArtifact,
+        propertiesArtifact: propertiesArtifact ?? this.propertiesArtifact);
   }
 
   @override

@@ -1,16 +1,23 @@
+import 'package:aleteo_arquetipo/modules/show_case/models/show_case_model.dart';
 import 'package:flutter/material.dart';
 import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
 
 class TemplateShowCase extends StatelessWidget {
-  const TemplateShowCase({super.key});
-
+  const TemplateShowCase({
+    super.key,
+    required this.showCaseModel,
+  });
+  final ShowCaseModel showCaseModel;
   @override
   Widget build(BuildContext context) {
     return MyAppScaffold(
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            const Text('Button'),
+            const Text(
+              'Button',
+              style: TextStyle(fontSize: 40),
+            ),
             ElevatedButton(
               onPressed: () {},
               child: const Text('template'),
@@ -41,7 +48,7 @@ class TemplateShowCase extends StatelessWidget {
 }
 
 class _PropertyHeader extends StatelessWidget {
-  const _PropertyHeader({super.key});
+  const _PropertyHeader();
   @override
   Widget build(BuildContext context) {
     return const Row(
@@ -55,7 +62,7 @@ class _PropertyHeader extends StatelessWidget {
 }
 
 class _Property extends StatelessWidget {
-  const _Property({super.key, required this.text});
+  const _Property({required this.text});
   final String text;
   @override
   Widget build(BuildContext context) {

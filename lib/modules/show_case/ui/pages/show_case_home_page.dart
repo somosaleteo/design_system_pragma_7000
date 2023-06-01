@@ -5,6 +5,7 @@ import 'package:aleteo_arquetipo/modules/show_case/ui/pages/template_show_case_p
 import 'package:aleteo_arquetipo/ui/widgets/responsive/my_app_scaffold_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/button.dart';
 import '../widgets/custom_button.dart';
 
 class ShowCaseHomePage extends StatelessWidget {
@@ -14,11 +15,24 @@ class ShowCaseHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ShowCaseBloc showCaseBloc = ShowCaseBloc();
     return MyAppScaffold(
       withAppbar: true,
       child: Center(
-        child: CustomButton(
-          text: 'Template',
+        // child: CustomButton(
+        //   text: 'Template',
+        //   onPressed: () {
+        //     blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name).pushPage(
+        //           'Template Show Case',
+        //           // const TemplateShowCase(),
+        //         );
+        //   },
+        // ),
+        child: Button(
+          title: 'Boton de prueba',
+          width: 150,
+          height: 40,
+          type: 'primary',
           onPressed: () {
             blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name).pushPage(
                   'Template Show Case',
