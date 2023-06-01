@@ -1,12 +1,18 @@
-import 'package:aleteo_arquetipo/modules/show_case/abstractions/properties_artifact.dart';
+import '../abstractions/properties_artifact.dart';
 
 class ButtonPropertiesArtifact extends PropertiesArtifact {
   @override
-  String defaultValue = '';
+  String defaultValue = 'DefaultValue';
 
   @override
-  String description = '';
+  String description = 'Description';
 
   @override
-  String name = '';
+  String name = 'Name';
+
+  ButtonPropertiesArtifact({
+    required this.name,
+    required this.description,
+    required this.defaultValue,
+  });
 }

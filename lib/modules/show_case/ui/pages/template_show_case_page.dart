@@ -1,6 +1,9 @@
-import 'package:aleteo_arquetipo/modules/show_case/models/show_case_model.dart';
 import 'package:flutter/material.dart';
 import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
+import '../../models/show_case_model.dart';
+import '../widgets/code_list.dart';
+import '../widgets/properties_list.dart';
+import '../widgets/propery_header.dart';
 
 class TemplateShowCase extends StatelessWidget {
   const TemplateShowCase({
@@ -14,67 +17,18 @@ class TemplateShowCase extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            const Text(
-              'Button',
-              style: TextStyle(fontSize: 40),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('template'),
-            ),
-            const Text('Aqui va el código'),
-            const _PropertyHeader(),
-            ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 50,
-              itemBuilder: (context, index) {
-                return Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    _Property(text: 'Name $index'),
-                    _Property(text: 'Description $index'),
-                    _Property(text: 'Default $index'),
-                  ],
-                );
-              },
-            ),
+            const SizedBox(height: 10.0),
+            const Text('Button', style: TextStyle(fontSize: 40)),
+            const SizedBox(height: 10.0),
+            showCaseModel.artifact.body,
+            const SizedBox(height: 10.0),
+            CodeList(showCaseModel: showCaseModel),
+            const SizedBox(height: 15.0),
+            const PropertyHeader(),
+            PropertiesList(showCaseModel: showCaseModel),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _PropertyHeader extends StatelessWidget {
-  const _PropertyHeader();
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        _Property(text: "Name"),
-        _Property(text: "Description"),
-        _Property(text: "Default"),
-      ],
-    );
-  }
-}
-
-class _Property extends StatelessWidget {
-  const _Property({required this.text});
-  final String text;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      height: 50,
-      margin: const EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Center(child: Text(text)),
     );
   }
 }
