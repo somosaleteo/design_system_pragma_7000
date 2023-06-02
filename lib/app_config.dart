@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:aleteo_arquetipo/modules/data_base/config/config.dart';
 import 'package:aleteo_arquetipo/modules/show_case/ui/pages/show_case_home_page.dart';
 
 import 'blocs/bloc_drawer.dart';
@@ -54,7 +55,8 @@ FutureOr<void> buttonsBlocInsert(BlocCore<dynamic> blocCoreInt) async {
       .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
       .setHomePageAndUpdate(
         ShowCaseHomePage(
-          buttonBloc: blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
+          buttonBloc:
+              blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
         ),
       );
   blocCoreInt
@@ -116,6 +118,7 @@ Future<void> onboarding({
           <FutureOr<void> Function()>[
             testMe,
             () async {
+              DataBaseConfig().initConfigModule();
               await buttonsBlocInsert(blocCoreInt);
             }
           ],

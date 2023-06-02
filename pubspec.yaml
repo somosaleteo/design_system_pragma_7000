@@ -7,21 +7,22 @@ environment:
   sdk: '>=2.19.2 <3.0.0'
 
 dependencies:
+  cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-
-
-  cupertino_icons: ^1.0.2
-  flutter_native_splash: ^2.2.16
+  extension_google_sign_in_as_googleapis_auth: ^2.0.9
   flutter_launcher_icons: ^0.11.0
-  # google_fonts: ^4.0.3
+  flutter_native_splash: ^2.2.16
+  google_sign_in: ^6.1.3
+  googleapis_auth: ^1.4.1
+  http: ^0.13.5
 
 # configuracion Splash screen
 flutter_native_splash:
   color: "#df11f2"
   color_dark: "#28022b"
   image: "assets/icon.png"
-  
+
   android_12:
     color: "#df11f2"
     color_dark: "#28022b"
@@ -39,10 +40,9 @@ flutter_icons:
     theme_color: "#df11f2"
 
 dev_dependencies:
+  flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
-
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -52,13 +52,10 @@ flutter:
   assets:
     - assets/
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
