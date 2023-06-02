@@ -15,22 +15,25 @@ class CodeList extends StatelessWidget {
           final codeKey =
               showCaseModel.codeArtifact.codes.keys.elementAt(index);
           final code = showCaseModel.codeArtifact.codes[codeKey];
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Lenguaje: $codeKey',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0,
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Lenguaje: $codeKey',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10.0),
-              Text(
-                code ?? "",
-                style: const TextStyle(color: Colors.white),
-              ),
-            ],
+                const SizedBox(height: 10.0),
+                Text(
+                  code ?? "",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
           );
         },
       ),
