@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../models/show_case_model.dart';
+import '../../abstractions/properties_artifact.dart';
 import 'property.dart';
 
 class PropertiesList extends StatelessWidget {
-  const PropertiesList({super.key, required this.showCaseModel});
-  final ShowCaseModel showCaseModel;
+  const PropertiesList({super.key, required this.properties});
+  final List<PropertiesArtifact> properties;
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +12,9 @@ class PropertiesList extends StatelessWidget {
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: showCaseModel.propertiesArtifact.length,
+      itemCount: properties.length,
       itemBuilder: (context, index) {
-        final property = showCaseModel.propertiesArtifact[index];
+        final property = properties[index];
         return Column(
           children: [
             Row(
@@ -22,7 +22,7 @@ class PropertiesList extends StatelessWidget {
               children: [
                 Property(text: property.name),
                 Property(text: property.description),
-                Property(text: property.defaultValue),
+                Property(text: property.defaultValue.toString()),
               ],
             ),
             const Divider(color: Colors.grey),

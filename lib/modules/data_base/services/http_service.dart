@@ -35,8 +35,6 @@ class HttpService {
     final Map<String, dynamic> responseDataJson = jsonDecode(responseData);
 
     if (response.statusCode == 200) {
-      print("Response Data Json");
-      print(responseDataJson);
       if (responseDataJson.containsKey('error')) {
         final dataException =
             errorHandlingService.launchAlertError(responseDataJson['error']);
@@ -45,15 +43,15 @@ class HttpService {
         throw dataException;
       }
 
-      if (responseDataJson["response"]["result"]["error"] != null) {
-        final dataException = errorHandlingService
-            .launchAlertError(responseDataJson['response']['result']['error']);
-        debugPrint(responseDataJson.toString());
+      // if (responseDataJson["response"]["result"]["error"] != null) {
+      //   final dataException = errorHandlingService
+      //       .launchAlertError(responseDataJson['response']['result']['error']);
+      //   debugPrint(responseDataJson.toString());
 
-        throw dataException;
-      }
+      //   throw dataException;
+      // }
 
-      return {'data': responseDataJson["response"]["result"]["data"]};
+      return {'data': responseDataJson["response"]["result"]};
     }
 
     debugPrint(responseDataJson.toString());

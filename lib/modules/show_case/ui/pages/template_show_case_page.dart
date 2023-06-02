@@ -1,3 +1,4 @@
+import 'package:aleteo_arquetipo/modules/show_case/ui/widgets/button.dart';
 import 'package:flutter/material.dart';
 import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
 import '../../models/show_case_model.dart';
@@ -18,14 +19,17 @@ class TemplateShowCase extends StatelessWidget {
         child: Column(
           children: <Widget>[
             const SizedBox(height: 10.0),
-            const Text('Button', style: TextStyle(fontSize: 40)),
+            Text(showCaseModel.title, style: const TextStyle(fontSize: 40)),
             const SizedBox(height: 10.0),
-            showCaseModel.artifact.body,
+            if (showCaseModel.artifact.type == 'button')
+              const Button(
+                title: 'Adios mundo',
+              ),
             const SizedBox(height: 10.0),
-            CodeList(showCaseModel: showCaseModel),
+            CodeList(codes: showCaseModel.codeArtifact),
             const SizedBox(height: 15.0),
             const PropertyHeader(),
-            PropertiesList(showCaseModel: showCaseModel),
+            PropertiesList(properties: showCaseModel.propertiesArtifact),
           ],
         ),
       ),

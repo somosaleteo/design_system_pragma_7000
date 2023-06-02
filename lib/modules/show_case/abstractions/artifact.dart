@@ -1,13 +1,17 @@
-import 'package:flutter/material.dart';
 
-abstract class Artifact {
-  double get width;
-  double get heigth;
-  double get radius;
-  Widget get body;
+import 'package:aleteo_arquetipo/entities/entity_model.dart';
 
-  set width(double width);
-  set heigth(double heigth);
-  set radius(double radius);
-  set body(Widget body);
+abstract class Artifact extends EntityModel {
+  final int width;
+  final int height;
+  final int radius;
+  final String type;
+
+  const Artifact({
+    required this.type,
+    required this.height,
+    required this.radius,
+    required this.width,
+  });
+ 
 }

@@ -1,5 +1,11 @@
-abstract class CodeArtifact {
-  Map<String, String> get codes;
+import 'package:aleteo_arquetipo/entities/entity_model.dart';
 
-  set codes(Map<String, String> codes);
+abstract class CodeArtifact extends EntityModel {
+  final String language;
+  final String code;
+
+  const CodeArtifact({
+    required this.language,
+    required this.code,
+  });
 }

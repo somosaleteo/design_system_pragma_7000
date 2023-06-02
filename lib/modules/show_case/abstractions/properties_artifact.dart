@@ -1,9 +1,13 @@
-abstract class PropertiesArtifact {
-  String get name;
-  String get description;
-  String get defaultValue;
+import 'package:aleteo_arquetipo/entities/entity_model.dart';
 
-  set name(String name);
-  set description(String description);
-  set defaultValue(String defaultValue);
+abstract class PropertiesArtifact extends EntityModel {
+  final String name;
+  final String description;
+  final dynamic defaultValue;
+
+  const PropertiesArtifact({
+    required this.name,
+    required this.defaultValue,
+    required this.description,
+  });
 }

@@ -55,7 +55,7 @@ FutureOr<void> buttonsBlocInsert(BlocCore<dynamic> blocCoreInt) async {
       .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
       .setHomePageAndUpdate(
         ShowCaseHomePage(
-          buttonBloc:
+          showCaseBloc:
               blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
         ),
       );

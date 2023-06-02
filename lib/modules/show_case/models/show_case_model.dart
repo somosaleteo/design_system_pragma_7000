@@ -12,14 +12,14 @@ class ShowCaseModel extends EntityModel {
   });
   final String title;
   final Artifact artifact;
-  final CodeArtifact codeArtifact;
+  final List<CodeArtifact> codeArtifact;
   final List<PropertiesArtifact> propertiesArtifact;
 
   @override
   ShowCaseModel copyWith({
     String? title,
     Artifact? artifact,
-    CodeArtifact? codeArtifact,
+    List<CodeArtifact>? codeArtifact,
     List<PropertiesArtifact>? propertiesArtifact,
   }) {
     return ShowCaseModel(

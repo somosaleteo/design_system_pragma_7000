@@ -27,7 +27,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            endDrawer: Drawer(),
+            endDrawer: const Drawer(),
             body: Builder(
               builder: (BuildContext context) {
                 return const ListTileExitDrawerWidget();
