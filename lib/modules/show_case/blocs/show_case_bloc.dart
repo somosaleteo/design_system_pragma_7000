@@ -66,6 +66,8 @@ class ShowCaseBloc extends BlocModule {
         //codigos
         final codes = showcase['code'];
         codeArtifact = [];
+        print("CODES");
+        print(codes);
         for (var code in codes) {
           codeArtifact.add(CheckBoxCodeArtifact.fromJson(code));
         }
