@@ -3,18 +3,15 @@ part of pragma_app.modules.data_base.blocs;
 class DataBaseBloc extends BlocModule {
   static String name = 'dataBaseBlocName';
 
-  //final AuthBloc authBloc;
   final NavigatorBloc navigatorBloc;
 
   late String accessToken;
 
   DataBaseBloc({
-    //required this.authBloc,
     required this.navigatorBloc,
   }) {
-    //accessToken = 'Bearer ${authBloc.user.accessToken}';
     accessToken =
-        'Bearer ya29.a0AWY7CklHFOM7rdkBrfRxFoyQpEGd2huaNn4tjMJz_j0Pn828ZfiBYkvtRzMo3weaGNjGWk0pn3B_qB63aVegsAhomgW2TwSd83Fmewh0qT0Ax8AjaMj7HKJJ_i8tpDA8FuQ4hNI7rOpDWaMYPW3Ge4jiflGgaCgYKAcYSARMSFQG1tDrpovNLAJ4ugnZbtrtw5lE1PQ0163';
+        'Bearer ya29.a0AWY7Ckk3XsfTuWr0RUn_MfoOBHavgZ_CmouDUF1rm22z44roEV1_JN8cejxVAciJDtzOqQ1zJROSaBxcaPnMyWlOlYUu8F1zNOnCnzHatmIESjx8tY7tUe65ANXo0xvYBpYPne1km0fXQ2fP0MgMD1nkD2YGkwaCgYKAXcSARMSFQG1tDrpNm0wzyYRbi9wimKKmDvacg0165';
   }
 
   Future<Map<String, dynamic>> create({

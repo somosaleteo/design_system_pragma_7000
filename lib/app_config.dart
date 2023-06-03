@@ -85,31 +85,7 @@ Future<void> onboarding({
       ),
     );
 
-    // Inyectamos el demo
-    // blocCoreInt.addBlocModule(
-    //   BlocDemo.name,
-    //   BlocDemo(
-    //     drawerMainMenuBloc: blocCoreInt
-    //         .getBlocModule<DrawerMainMenuBloc>(DrawerMainMenuBloc.name),
-    //     drawerSecondaryMenuBloc:
-    //         blocCoreInt.getBlocModule<DrawerSecondaryMenuBloc>(
-    //       DrawerSecondaryMenuBloc.name,
-    //     ),
-    //   ),
-    // );
-    // blocCoreInt.addBlocModule(
-    //   OnboardingBloc.name,
-    //   OnboardingBloc(
-    //     <FutureOr<void> Function()>[
-    //       testMe,
-    //       testMe,
-    //       testMe,
-    //       () async {
-    //         await demoInsert(blocCoreInt);
-    //       }
-    //     ],
-    //   ),
-    // );
+   
 
     blocCoreInt.addBlocModule(ShowCaseBloc.name, ShowCaseBloc());
     blocCoreInt.addBlocModule(
@@ -118,6 +94,7 @@ Future<void> onboarding({
           <FutureOr<void> Function()>[
             testMe,
             () async {
+              
               DataBaseConfig().initConfigModule();
               await buttonsBlocInsert(blocCoreInt);
             }

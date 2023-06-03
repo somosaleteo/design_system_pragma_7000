@@ -5,9 +5,8 @@ class DataBaseConfig {
     blocCore.addBlocModule<DataBaseBloc>(
       DataBaseBloc.name,
       DataBaseBloc(
-        //authBloc: blocCore.getBlocModule<AuthBloc>(AuthBloc.name),
         navigatorBloc:
-            blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
+          blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
       ),
     );
   }
