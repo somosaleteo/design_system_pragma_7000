@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../models/show_case_model.dart';
 
 class CodeList extends StatelessWidget {
@@ -31,6 +32,40 @@ class CodeList extends StatelessWidget {
                 Text(
                   code ?? "",
                   style: const TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 10.0),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    onTap: () async {
+                      Clipboard.setData(ClipboardData(text: code)).then((_) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Copied to clipboard !')));
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      height: 30,
+                      width: 70,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 1,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Copy code',
+                          style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.white54,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
