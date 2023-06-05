@@ -7,8 +7,8 @@ class PropertyHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey[300],
-      child: const Row(
-        children: [
+      child: Row(
+        children: const [
           Property(text: "Name"),
           Property(text: "Description"),
           Property(text: "Default"),
