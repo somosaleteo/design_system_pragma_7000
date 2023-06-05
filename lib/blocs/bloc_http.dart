@@ -1,17 +1,21 @@
-part of pragma_app.modules.data_base.blocs;
+import 'dart:async';
+import '../entities/entity_bloc.dart';
+import '../providers/http_provider.dart';
+import '../utils/methods_enum.dart';
+import 'navigator_bloc.dart';
 
-class DataBaseBloc extends BlocModule {
-  static String name = 'dataBaseBlocName';
+class BlocHttp extends BlocModule {
+  static String name = 'blocHttp';
 
   final NavigatorBloc navigatorBloc;
 
   late String accessToken;
 
-  DataBaseBloc({
+  BlocHttp({
     required this.navigatorBloc,
   }) {
     accessToken =
-        'Bearer ya29.a0AWY7Ckn5DXAjGPgboSaCTFR4zjk7m-jfSNMKOvw1OdCd3U1VadoYpFlqaS2BLcRgisvOipVOXd1ImPEbjz8COnhVMBs4c-ydFutbWxzHhWMjz30e2uYP68K1KgqjEo6R8CcQNfXMgqJV1eZtEgUqj-Lyzo20HAaCgYKAbwSARASFQG1tDrpc81Tl6PZktz8QDhJyCSlsQ0165';
+        'Bearer ya29.a0AWY7CkkrKJqTPd8zHPyq7ShbBuqPQ5VsUiR0QzXM-ovLBUvRsfDGSSTj6u1gLA5rrJg9I6z3OwKYVrdz15GzGM45M3S8MxeT0b6xdIKothZjskQcBmBkPZnYHybhykXMxFGRXC7AukHiXUNNDKZDyqIMZfzv5gaCgYKAbYSARASFQG1tDrplUtBKXim9BxDKDuYftymeQ0165';
   }
 
   Future<Map<String, dynamic>> create({
@@ -20,7 +24,7 @@ class DataBaseBloc extends BlocModule {
   }) async {
     final data = {'function': module, 'parameters': parameters};
 
-    final httpService = HttpService(
+    final httpService = HttpProvider(
       method: Methods.post,
       accessToken: accessToken,
       data: data,
@@ -40,7 +44,7 @@ class DataBaseBloc extends BlocModule {
   }) async {
     final data = {'function': module, 'parameters': parameters};
 
-    final httpService = HttpService(
+    final httpService = HttpProvider(
       method: Methods.post,
       accessToken: accessToken,
       data: data,

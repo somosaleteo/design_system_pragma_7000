@@ -1,5 +1,3 @@
-import 'package:aleteo_arquetipo/modules/show_case/ui/widgets/button.dart';
-import 'package:aleteo_arquetipo/modules/show_case/ui/widgets/checkbox_item.dart';
 import 'package:flutter/material.dart';
 import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
 import '../../models/show_case_model.dart';
@@ -22,10 +20,8 @@ class TemplateShowCase extends StatelessWidget {
             const SizedBox(height: 10.0),
             Text(showCaseModel.title, style: const TextStyle(fontSize: 40)),
             const SizedBox(height: 10.0),
-            if (showCaseModel.artifact.type == 'button')
-              const Button(title: 'Adios mundo'),
-            if (showCaseModel.artifact.type == 'checkbox')
-              CheckBoxItem(onChanged: (value) {}),
+            Image.network(
+                'https://drive.google.com/uc?export=download&id=1bUBv6HuDFJOFy4ehaCOJL27OCBoYlv8V'),
             const SizedBox(height: 10.0),
             CodeList(codes: showCaseModel.codeArtifact),
             const SizedBox(height: 15.0),

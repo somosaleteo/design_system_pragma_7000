@@ -1,9 +1,6 @@
 import 'dart:async';
-
-import 'package:aleteo_arquetipo/modules/data_base/config/config.dart';
-import 'package:aleteo_arquetipo/modules/show_case/ui/pages/show_case_home_page.dart';
-
 import 'blocs/bloc_drawer.dart';
+import 'blocs/bloc_http.dart';
 import 'blocs/bloc_processing.dart';
 import 'blocs/bloc_responsive.dart';
 import 'blocs/bloc_secondary_drawer.dart';
@@ -14,6 +11,7 @@ import 'entities/entity_bloc.dart';
 import 'modules/show_case/blocs/show_case_bloc.dart';
 import 'modules/demo/blocs/bloc_demo.dart';
 import 'modules/demo/ui/pages/demo_home_page.dart';
+import 'modules/show_case/ui/pages/show_case_home_page.dart';
 import 'providers/my_app_navigator_provider.dart';
 import 'services/theme_config.dart';
 import 'services/theme_service.dart';
@@ -50,7 +48,7 @@ FutureOr<void> demoInsert(BlocCore<dynamic> blocCoreInt) async {
       .setTitle('Demo Home');
 }
 
-FutureOr<void> buttonsBlocInsert(BlocCore<dynamic> blocCoreInt) async {
+FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
   blocCoreInt
       .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
       .setHomePageAndUpdate(
@@ -84,19 +82,26 @@ Future<void> onboarding({
         ),
       ),
     );
-
-   
-
-    blocCoreInt.addBlocModule(ShowCaseBloc.name, ShowCaseBloc());
+    blocCore.addBlocModule<BlocHttp>(
+      BlocHttp.name,
+      BlocHttp(
+        navigatorBloc:
+            blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
+      ),
+    );
+    blocCoreInt.addBlocModule(
+      ShowCaseBloc.name,
+      ShowCaseBloc(
+        blocHttp: blocCore.getBlocModule<BlocHttp>(BlocHttp.name),
+      ),
+    );
     blocCoreInt.addBlocModule(
         OnboardingBloc.name,
         OnboardingBloc(
           <FutureOr<void> Function()>[
             testMe,
             () async {
-              
-              DataBaseConfig().initConfigModule();
-              await buttonsBlocInsert(blocCoreInt);
+              await showCaseBlocInsert(blocCoreInt);
             }
           ],
         ));

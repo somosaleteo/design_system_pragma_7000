@@ -1,16 +1,17 @@
 import 'package:aleteo_arquetipo/entities/entity_model.dart';
 
-import '../abstractions/code_artifact.dart';
+class CodeArtifactModel extends EntityModel {
+  final String language;
+  final String code;
 
-class CheckBoxCodeArtifact extends CodeArtifact {
-  const CheckBoxCodeArtifact({
-    required super.language,
-    required super.code,
+  const CodeArtifactModel({
+    required this.language,
+    required this.code,
   });
 
   @override
   EntityModel copyWith({String? language, String? code}) {
-    return CheckBoxCodeArtifact(
+    return CodeArtifactModel(
         language: language ?? this.language, code: code ?? this.code);
   }
 
@@ -24,7 +25,7 @@ class CheckBoxCodeArtifact extends CodeArtifact {
 
   @override
   bool operator ==(Object other) {
-    return other is CheckBoxCodeArtifact &&
+    return other is CodeArtifactModel &&
         other.runtimeType == runtimeType &&
         other.hashCode == hashCode;
   }
@@ -33,7 +34,7 @@ class CheckBoxCodeArtifact extends CodeArtifact {
   int get hashCode => '$language$code'.hashCode;
 
   static fromJson(Map<String, dynamic> json) {
-    return CheckBoxCodeArtifact(
+    return CodeArtifactModel(
       language: json['language'] ?? '',
       code: json['code'] ?? '',
     );

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../abstractions/code_artifact.dart';
+import '../../models/code_artifact_model.dart';
 
 class CodeList extends StatelessWidget {
   const CodeList({super.key, required this.codes});
-  final List<CodeArtifact> codes;
+  final List<CodeArtifactModel> codes;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

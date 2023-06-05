@@ -1,19 +1,23 @@
 import 'package:aleteo_arquetipo/entities/entity_model.dart';
 import 'package:flutter/material.dart';
-import '../abstractions/artifact.dart';
 
-class ButtonArtifact extends Artifact {
-  const ButtonArtifact({
-    required super.type,
-    required super.height,
-    required super.radius,
-    required super.width,
+class ArtifactModel extends EntityModel {
+  const ArtifactModel({
+    required this.type,
+    required this.height,
+    required this.radius,
+    required this.width,
   });
+
+  final int width;
+  final int height;
+  final int radius;
+  final String type;
 
   @override
   EntityModel copyWith(
       {String? type, int? height, int? radius, int? width, Widget? body}) {
-    return ButtonArtifact(
+    return ArtifactModel(
       type: type ?? this.type,
       height: height ?? this.height,
       radius: radius ?? this.radius,
@@ -33,7 +37,7 @@ class ButtonArtifact extends Artifact {
 
   @override
   bool operator ==(Object other) {
-    return other is ButtonArtifact &&
+    return other is ArtifactModel &&
         other.runtimeType == runtimeType &&
         other.hashCode == hashCode;
   }
@@ -42,7 +46,7 @@ class ButtonArtifact extends Artifact {
   int get hashCode => '$type$height$radius$width'.hashCode;
 
   static fromJson(Map<String, dynamic> json) {
-    return ButtonArtifact(
+    return ArtifactModel(
       type: json['type'] ?? '',
       height: json['height'] ?? 0,
       radius: json['radius'] ?? 0,

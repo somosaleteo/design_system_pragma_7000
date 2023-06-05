@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../abstractions/properties_artifact.dart';
+import '../../models/properties_artifact_model.dart';
 import 'property.dart';
 
 class PropertiesList extends StatelessWidget {
   const PropertiesList({super.key, required this.properties});
-  final List<PropertiesArtifact> properties;
+  final List<PropertiesArtifactModel> properties;
 
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,17 @@
-part of pragma_app.modules.data_base.services;
+import 'dart:convert';
+import '../../../blocs/navigator_bloc.dart';
+import '../services/http_service.dart';
+import 'package:http/http.dart' as http;
+import '../utils/methods_enum.dart';
 
-class HttpService {
+class HttpProvider {
   final Methods method;
   final Map<String, dynamic>? data;
   final String? accessToken;
   final NavigatorBloc navigatorBloc;
   //final AuthBloc authBloc;
 
-  HttpService({
+  HttpProvider({
     this.data,
     required this.method,
     this.accessToken,
@@ -18,13 +22,13 @@ class HttpService {
   }
 
   Future<Map<String, dynamic>> launchUrl() async {
-    final httpProvider = HttpProvider(
+    final httpService = HttpService(
       method: method.toString().split('.')[1].toUpperCase(),
       body: data,
       headers: {'Authorization': accessToken ?? ''},
     );
 
-    final http.StreamedResponse response = await httpProvider.launchUrl();
+    final http.StreamedResponse response = await httpService.launchUrl();
 
     final responseData = await response.stream.bytesToString();
     final Map<String, dynamic> responseDataJson = jsonDecode(responseData);

@@ -1,13 +1,15 @@
-part of pragma_app.modules.data_base.providers;
+import 'dart:convert';
+import '../providers/my_app_navigator_provider.dart';
+import 'package:http/http.dart' as http;
 
-class HttpProvider {
+class HttpService {
   final String method;
   final Map<String, dynamic>? body;
   final Map<String, String> headers;
   final String url =
       "https://script.googleapis.com/v1/scripts/AKfycby3XDh8baR6sWzHJQhacr-bge-RkkxMyswsT8U0DlW5:run";
 
-  HttpProvider({
+  HttpService({
     this.body,
     required this.method,
     required this.headers,

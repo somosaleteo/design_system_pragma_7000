@@ -1,18 +1,20 @@
 import 'package:aleteo_arquetipo/entities/entity_model.dart';
 
-import '../abstractions/properties_artifact.dart';
+class PropertiesArtifactModel extends EntityModel {
+  final String name;
+  final String description;
+  final dynamic defaultValue;
 
-class CheckBoxPropertiesArtifact extends PropertiesArtifact {
-  const CheckBoxPropertiesArtifact({
-    required super.name,
-    required super.defaultValue,
-    required super.description,
+  const PropertiesArtifactModel({
+    required this.name,
+    required this.defaultValue,
+    required this.description,
   });
 
   @override
   EntityModel copyWith(
       {String? name, String? defaultValue, String? description}) {
-    return CheckBoxPropertiesArtifact(
+    return PropertiesArtifactModel(
         name: name ?? this.name,
         defaultValue: defaultValue ?? this.defaultValue,
         description: description ?? this.description);
@@ -29,7 +31,7 @@ class CheckBoxPropertiesArtifact extends PropertiesArtifact {
 
   @override
   bool operator ==(Object other) {
-    return other is CheckBoxPropertiesArtifact &&
+    return other is PropertiesArtifactModel &&
         other.runtimeType == runtimeType &&
         other.hashCode == hashCode;
   }
@@ -38,7 +40,7 @@ class CheckBoxPropertiesArtifact extends PropertiesArtifact {
   int get hashCode => '$name$description$defaultValue'.hashCode;
 
   static fromJson(Map<String, dynamic> json) {
-    return CheckBoxPropertiesArtifact(
+    return PropertiesArtifactModel(
       name: json['name'] ?? '',
       defaultValue: json['defaultValue'] ?? '',
       description: json['description'] ?? '',
