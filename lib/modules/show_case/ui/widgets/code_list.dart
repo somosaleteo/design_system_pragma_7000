@@ -38,7 +38,9 @@ class CodeList extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: InkWell(
                     onTap: () async {
-                      Clipboard.setData(ClipboardData(text: code)).then((_) {
+                      Clipboard.setData(
+                              ClipboardData(text: code ?? 'Nothing to copy'))
+                          .then((_) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text('Copied to clipboard !')));
