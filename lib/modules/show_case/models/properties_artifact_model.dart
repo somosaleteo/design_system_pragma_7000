@@ -4,20 +4,24 @@ class PropertiesArtifactModel extends EntityModel {
   final String name;
   final String description;
   final dynamic defaultValue;
+  final String language;
 
   const PropertiesArtifactModel({
     required this.name,
     required this.defaultValue,
     required this.description,
+    required this.language,
   });
 
   @override
   EntityModel copyWith(
-      {String? name, String? defaultValue, String? description}) {
+      {String? name, String? defaultValue, String? description, String? language}) {
     return PropertiesArtifactModel(
         name: name ?? this.name,
         defaultValue: defaultValue ?? this.defaultValue,
-        description: description ?? this.description);
+        description: description ?? this.description,
+        language: language ?? this.language,
+        );
   }
 
   @override
@@ -26,6 +30,7 @@ class PropertiesArtifactModel extends EntityModel {
       'name': name,
       'defaultValue': defaultValue,
       'description': description,
+      'language': language,
     };
   }
 
@@ -44,6 +49,7 @@ class PropertiesArtifactModel extends EntityModel {
       name: json['name'] ?? '',
       defaultValue: json['defaultValue'] ?? '',
       description: json['description'] ?? '',
+      language: json['language'] ?? '',
     );
   }
 }

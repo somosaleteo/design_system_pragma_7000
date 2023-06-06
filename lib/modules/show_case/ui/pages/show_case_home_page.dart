@@ -33,6 +33,7 @@ class ShowCaseHomePage extends StatelessWidget {
                         .pushPage(
                           'Template Show Case',
                           TemplateShowCase(
+                            showCaseBloc: showCaseBloc,
                             showCaseModel:
                                 showCaseBloc.listShowCaseModel[index],
                           ),

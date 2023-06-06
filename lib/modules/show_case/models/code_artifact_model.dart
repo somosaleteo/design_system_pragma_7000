@@ -3,16 +3,21 @@ import 'package:aleteo_arquetipo/entities/entity_model.dart';
 class CodeArtifactModel extends EntityModel {
   final String language;
   final String code;
+  final String instructions;
 
   const CodeArtifactModel({
     required this.language,
     required this.code,
+    required this.instructions,
   });
 
   @override
-  EntityModel copyWith({String? language, String? code}) {
+  EntityModel copyWith({String? language, String? code, String? instructions}) {
     return CodeArtifactModel(
-        language: language ?? this.language, code: code ?? this.code);
+      language: language ?? this.language,
+      code: code ?? this.code,
+      instructions: instructions ?? this.instructions,
+    );
   }
 
   @override
@@ -20,6 +25,7 @@ class CodeArtifactModel extends EntityModel {
     return <String, dynamic>{
       'language': language,
       'code': code,
+      'instructions': instructions,
     };
   }
 
@@ -37,6 +43,7 @@ class CodeArtifactModel extends EntityModel {
     return CodeArtifactModel(
       language: json['language'] ?? '',
       code: json['code'] ?? '',
+      instructions: json['instructions'] ?? '',
     );
   }
 }
