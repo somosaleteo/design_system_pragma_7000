@@ -1,6 +1,6 @@
-import 'package:aleteo_arquetipo/modules/show_case/blocs/show_case_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../blocs/show_case_bloc.dart';
 import '../../models/code_artifact_model.dart';
 
 class CodeList extends StatelessWidget {
@@ -10,6 +10,7 @@ class CodeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    showCaseBloc.switchActiveLanguage(codes.first.language);
     return SingleChildScrollView(
       child: Container(
         height: 200,
@@ -23,6 +24,7 @@ class CodeList extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
+                autofocus: true,
                 onTap: () {
                   showCaseBloc.switchActiveLanguage(codeKey);
                 },
@@ -44,7 +46,7 @@ class CodeList extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    SelectableText(
                       code,
                       style: const TextStyle(color: Colors.white),
                     ),

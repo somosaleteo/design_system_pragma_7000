@@ -30,11 +30,9 @@ class ShowCaseBloc extends BlocModule {
 
   void switchActiveLanguage(String language) {
     _activeLanguage.value = language;
-    print('actualizando lenguaje a: ${_activeLanguage.value}');
   }
 
   String? parseUrlValidFromDrive(String googleDriveUrl) {
-    return null;
     RegExp regExp = RegExp(r'\/d\/([a-zA-Z0-9_-]+)');
     Match match = regExp.firstMatch(googleDriveUrl) as Match;
 
@@ -42,8 +40,6 @@ class ShowCaseBloc extends BlocModule {
       String fileId = match.group(1) ?? '';
       String imageUrl =
           'https://drive.google.com/uc?export=download&id=$fileId';
-
-      print(imageUrl); // URL válida para usar en NetworkImage en Flutter
       return imageUrl;
     } else {
       print('URL no válida de Google Drive');

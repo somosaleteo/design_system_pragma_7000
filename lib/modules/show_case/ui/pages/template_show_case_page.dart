@@ -16,7 +16,10 @@ class TemplateShowCase extends StatelessWidget {
   final ShowCaseBloc showCaseBloc;
   @override
   Widget build(BuildContext context) {
-    final urlImageDrive = showCaseBloc.parseUrlValidFromDrive(showCaseModel.artifact.type);
+    final urlImageDrive =
+        showCaseBloc.parseUrlValidFromDrive(showCaseModel.artifact.image);
+    const imageDefault =
+        'https://cdn-icons-png.flaticon.com/256/3342/3342137.png';
     return MyAppScaffold(
       child: SingleChildScrollView(
         child: Column(
@@ -24,9 +27,7 @@ class TemplateShowCase extends StatelessWidget {
             const SizedBox(height: 10.0),
             Text(showCaseModel.title, style: const TextStyle(fontSize: 40)),
             const SizedBox(height: 10.0),
-            
-            Image.network(
-                urlImageDrive ?? 'https://cdn-icons-png.flaticon.com/256/3342/3342137.png'),
+            Image.network(urlImageDrive ?? imageDefault),
             const SizedBox(height: 10.0),
             CodeList(
               codes: showCaseModel.codeArtifact,

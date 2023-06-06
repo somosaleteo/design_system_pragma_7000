@@ -3,35 +3,35 @@ import 'package:flutter/material.dart';
 
 class ArtifactModel extends EntityModel {
   const ArtifactModel({
-    required this.type,
     required this.height,
     required this.radius,
     required this.width,
+    required this.image,
   });
 
   final int width;
   final int height;
   final int radius;
-  final String type;
+  final String image;
 
   @override
   EntityModel copyWith(
-      {String? type, int? height, int? radius, int? width, Widget? body}) {
+      {String? image, int? height, int? radius, int? width, Widget? body}) {
     return ArtifactModel(
-      type: type ?? this.type,
       height: height ?? this.height,
       radius: radius ?? this.radius,
       width: width ?? this.width,
+      image: image ?? this.image,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'type': type,
       'heigth': height,
       'radius': radius,
       'width': width,
+      'image': image,
     };
   }
 
@@ -43,14 +43,14 @@ class ArtifactModel extends EntityModel {
   }
 
   @override
-  int get hashCode => '$type$height$radius$width'.hashCode;
+  int get hashCode => '$image$height$radius$width'.hashCode;
 
   static fromJson(Map<String, dynamic> json) {
     return ArtifactModel(
-      type: json['type'] ?? '',
       height: json['height'] ?? 0,
       radius: json['radius'] ?? 0,
       width: json['width'] ?? 0,
+      image: json['image'] ?? '',
     );
   }
 }
