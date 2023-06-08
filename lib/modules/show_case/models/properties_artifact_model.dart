@@ -1,12 +1,14 @@
 import 'package:aleteo_arquetipo/entities/entity_model.dart';
 
 class PropertiesArtifactModel extends EntityModel {
+  final String type;
   final String name;
   final String description;
   final dynamic defaultValue;
   final String language;
 
   const PropertiesArtifactModel({
+    required this.type,
     required this.name,
     required this.defaultValue,
     required this.description,
@@ -14,19 +16,26 @@ class PropertiesArtifactModel extends EntityModel {
   });
 
   @override
-  EntityModel copyWith(
-      {String? name, String? defaultValue, String? description, String? language}) {
+  EntityModel copyWith({
+    String? typeTmp,
+    String? nameTmp,
+    String? defaultValueTmp,
+    String? descriptionTmp,
+    String? languageTmp,
+  }) {
     return PropertiesArtifactModel(
-        name: name ?? this.name,
-        defaultValue: defaultValue ?? this.defaultValue,
-        description: description ?? this.description,
-        language: language ?? this.language,
-        );
+      type: typeTmp ?? type,
+      name: nameTmp ?? name,
+      defaultValue: defaultValueTmp ?? defaultValue,
+      description: descriptionTmp ?? description,
+      language: languageTmp ?? language,
+    );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
+      'type': type,
       'name': name,
       'defaultValue': defaultValue,
       'description': description,
@@ -46,6 +55,7 @@ class PropertiesArtifactModel extends EntityModel {
 
   static fromJson(Map<String, dynamic> json) {
     return PropertiesArtifactModel(
+      type: json['type'] ?? '',
       name: json['name'] ?? '',
       defaultValue: json['defaultValue'] ?? '',
       description: json['description'] ?? '',

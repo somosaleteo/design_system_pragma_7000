@@ -71,6 +71,7 @@ class ShowCaseBloc extends BlocModule {
       }
       listShowCase.add(
         ShowCaseModel(
+          // type: '',
           title: showcase['title'],
           artifact: artifactModel,
           codeArtifact: codeArtifact,

@@ -3,6 +3,8 @@ import '../../../../app_config.dart';
 import '../../../../blocs/navigator_bloc.dart';
 import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
 import '../../blocs/show_case_bloc.dart';
+import '../widgets/button.dart';
+import 'form_new_artifact_page.dart';
 import 'template_show_case_page.dart';
 
 class ShowCaseHomePage extends StatelessWidget {
@@ -15,35 +17,54 @@ class ShowCaseHomePage extends StatelessWidget {
     return MyAppScaffold(
       withAppbar: true,
       child: Center(
-        child: StreamBuilder(
-          stream: showCaseBloc.listShowCaseModelStream,
-          builder: (context, data) {
-            if (showCaseBloc.listShowCaseModel.isEmpty) {
-              return const CircularProgressIndicator();
-            }
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: showCaseBloc.listShowCaseModel.length,
-              itemBuilder: (BuildContext context, int index) {
-                final showCase = showCaseBloc.listShowCaseModel[index];
-                return ListTile(
-                  onTap: () {
-                    blocCore
-                        .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
-                        .pushPage(
-                          'Template Show Case',
-                          TemplateShowCase(
-                            showCaseBloc: showCaseBloc,
-                            showCaseModel:
-                                showCaseBloc.listShowCaseModel[index],
-                          ),
-                        );
+        child: Column(
+          children: [
+            StreamBuilder(
+              stream: showCaseBloc.listShowCaseModelStream,
+              builder: (context, data) {
+                if (showCaseBloc.listShowCaseModel.isEmpty) {
+                  return const CircularProgressIndicator();
+                }
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: showCaseBloc.listShowCaseModel.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final showCase = showCaseBloc.listShowCaseModel[index];
+                    return ListTile(
+                      onTap: () {
+                        blocCore
+                            .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
+                            .pushPageWidthTitle(
+                              showCase.title,
+                              'template_show_case',
+                              TemplateShowCase(
+                                showCaseBloc: showCaseBloc,
+                                showCaseModel:
+                                    showCaseBloc.listShowCaseModel[index],
+                              ),
+                            );
+                      },
+                      title: Text(showCase.title),
+                    );
                   },
-                  title: Text(showCase.title),
                 );
               },
-            );
-          },
+            ),
+            InkWell(
+              onTap: () {
+                blocCore
+                    .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
+                    .pushPageWidthTitle(
+                      'New Artifact',
+                      'new_artifact',
+                      const FormNewArtifactPage(),
+                    );
+              },
+              child: const Button(
+                title: 'New Artifact',
+              ),
+            ),
+          ],
         ),
       ),
     );

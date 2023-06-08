@@ -1,14 +1,15 @@
 import 'package:aleteo_arquetipo/entities/entity_model.dart';
-import 'package:flutter/material.dart';
 
 class ArtifactModel extends EntityModel {
   const ArtifactModel({
+    required this.type,
     required this.height,
     required this.radius,
     required this.width,
     required this.image,
   });
 
+  final String type;
   final int width;
   final int height;
   final int radius;
@@ -16,18 +17,24 @@ class ArtifactModel extends EntityModel {
 
   @override
   EntityModel copyWith(
-      {String? image, int? height, int? radius, int? width, Widget? body}) {
+      {String? typeTmp,
+      int? heightTmp,
+      int? radiusTmp,
+      int? widthTmp,
+      String? imageTmp}) {
     return ArtifactModel(
-      height: height ?? this.height,
-      radius: radius ?? this.radius,
-      width: width ?? this.width,
-      image: image ?? this.image,
+      type: typeTmp ?? type,
+      height: heightTmp ?? height,
+      radius: radiusTmp ?? radius,
+      width: widthTmp ?? width,
+      image: imageTmp ?? image,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
+      'type': type,
       'heigth': height,
       'radius': radius,
       'width': width,
@@ -43,10 +50,11 @@ class ArtifactModel extends EntityModel {
   }
 
   @override
-  int get hashCode => '$image$height$radius$width'.hashCode;
+  int get hashCode => '$type$image$height$radius$width'.hashCode;
 
   static fromJson(Map<String, dynamic> json) {
     return ArtifactModel(
+      type: json['type'] ?? '',
       height: json['height'] ?? 0,
       radius: json['radius'] ?? 0,
       width: json['width'] ?? 0,
