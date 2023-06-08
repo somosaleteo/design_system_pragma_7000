@@ -34,8 +34,9 @@ class ShowCaseHomePage extends StatelessWidget {
                       onTap: () {
                         blocCore
                             .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
-                            .pushPage(
-                              'Template Show Case',
+                            .pushPageWidthTitle(
+                              showCase.title,
+                              'template_show_case',
                               TemplateShowCase(
                                 showCaseBloc: showCaseBloc,
                                 showCaseModel:
@@ -53,8 +54,9 @@ class ShowCaseHomePage extends StatelessWidget {
               onTap: () {
                 blocCore
                     .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
-                    .pushPage(
-                      'Form New Artifact',
+                    .pushPageWidthTitle(
+                      'New Artifact',
+                      'new_artifact',
                       const FormNewArtifactPage(),
                     );
               },

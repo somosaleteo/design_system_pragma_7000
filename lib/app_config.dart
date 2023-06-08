@@ -57,7 +57,9 @@ FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
               blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
         ),
       );
-  blocCoreInt.getBlocModule<NavigatorBloc>(NavigatorBloc.name);
+  blocCoreInt
+      .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
+      .setTitle('Show Case Home');
 }
 
 Future<void> onboarding({
