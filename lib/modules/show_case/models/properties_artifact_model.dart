@@ -35,9 +35,8 @@ class PropertiesArtifactModel extends EntityModel {
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'type': type,
       'name': name,
-      'defaultValue': defaultValue,
+      'default_value': defaultValue,
       'description': description,
       'language': language,
     };

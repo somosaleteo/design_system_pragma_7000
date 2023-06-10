@@ -61,6 +61,7 @@ class CustomAutoCompleteInputWidget extends StatefulWidget {
     this.onEditingValidateFunction = _defaultFunction,
     this.icondata,
     this.textInputType = TextInputType.text,
+    this.controller,
   });
 
   /// The list of suggestions for autocomplete.
@@ -87,6 +88,8 @@ class CustomAutoCompleteInputWidget extends StatefulWidget {
   /// The type of keyboard input to be displayed for the input field.
   final TextInputType textInputType;
 
+  final TextEditingController? controller;
+
   @override
   CustomAutoCompleteInputWidgetState createState() =>
       CustomAutoCompleteInputWidgetState();
@@ -95,6 +98,7 @@ class CustomAutoCompleteInputWidget extends StatefulWidget {
 class CustomAutoCompleteInputWidgetState
     extends State<CustomAutoCompleteInputWidget> {
   late TextEditingController _controller;
+
   String? _errorText;
   late String _selectedValue;
   bool _isStarted = false;
@@ -103,7 +107,10 @@ class CustomAutoCompleteInputWidgetState
   void initState() {
     super.initState();
     _selectedValue = widget.initialData;
-    _controller = TextEditingController(text: _selectedValue);
+    _controller = widget.controller != null
+        ? widget.controller!
+        : TextEditingController(text: _selectedValue);
+
     _onValidate(_selectedValue);
   }
 

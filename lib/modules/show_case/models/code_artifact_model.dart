@@ -30,10 +30,9 @@ class CodeArtifactModel extends EntityModel {
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'type': type,
       'language': language,
       'code': code,
-      'instructions': instructions,
+      'instruction': instructions,
     };
   }
 

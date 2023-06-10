@@ -6,13 +6,13 @@ class HttpService {
   final String method;
   final Map<String, dynamic>? body;
   final Map<String, String> headers;
-  final String url =
-      "https://script.googleapis.com/v1/scripts/AKfycby3XDh8baR6sWzHJQhacr-bge-RkkxMyswsT8U0DlW5:run";
+  final String url;
 
   HttpService({
     this.body,
     required this.method,
     required this.headers,
+    required this.url
   });
 
   Future<http.StreamedResponse> launchUrl() async {

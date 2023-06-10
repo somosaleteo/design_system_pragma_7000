@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:aleteo_arquetipo/modules/show_case/blocs/create_artifact_bloc.dart';
+import 'package:flutter/material.dart';
+
 import 'blocs/bloc_drawer.dart';
 import 'blocs/bloc_http.dart';
 import 'blocs/bloc_processing.dart';
@@ -55,11 +58,25 @@ FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
         ShowCaseHomePage(
           showCaseBloc:
               blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
+          createArtifactBloc: blocCoreInt
+              .getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
         ),
       );
   blocCoreInt
       .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
       .setTitle('Show Case Home');
+
+  Map<String, Widget> availablePages = {
+    ShowCaseBloc.name: ShowCaseHomePage(
+      showCaseBloc: blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
+      createArtifactBloc: blocCoreInt
+          .getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
+    )
+  };
+
+  blocCore
+      .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
+      .addPagesForDynamicLinksDirectory(availablePages);
 }
 
 Future<void> onboarding({
@@ -92,6 +109,12 @@ Future<void> onboarding({
     blocCoreInt.addBlocModule(
       ShowCaseBloc.name,
       ShowCaseBloc(
+        blocHttp: blocCore.getBlocModule<BlocHttp>(BlocHttp.name),
+      ),
+    );
+    blocCoreInt.addBlocModule(
+      CreateArtifactBloc.name,
+      CreateArtifactBloc(
         blocHttp: blocCore.getBlocModule<BlocHttp>(BlocHttp.name),
       ),
     );

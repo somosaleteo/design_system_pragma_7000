@@ -15,6 +15,11 @@ class ArtifactModel extends EntityModel {
   final int radius;
   final String image;
 
+  factory ArtifactModel.empty() {
+    return const ArtifactModel(
+        type: '', height: 0, radius: 0, width: 0, image: '');
+  }
+
   @override
   EntityModel copyWith(
       {String? typeTmp,
@@ -34,7 +39,6 @@ class ArtifactModel extends EntityModel {
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'type': type,
       'heigth': height,
       'radius': radius,
       'width': width,

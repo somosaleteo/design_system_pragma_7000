@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
+
 import '../../../blocs/bloc_http.dart';
 import '../../../entities/entity_bloc.dart';
 import '../models/artifact_model.dart';
@@ -42,14 +44,14 @@ class ShowCaseBloc extends BlocModule {
           'https://drive.google.com/uc?export=download&id=$fileId';
       return imageUrl;
     } else {
-      print('URL no válida de Google Drive');
+      debugPrint('URL no válida de Google Drive');
       return null;
     }
   }
 
   Future<void> getShowCaseData() async {
     final response =
-        await blocHttp.read(module: "getShowCaseTest2", parameters: []);
+        await blocHttp.read(url: "https://script.google.com/macros/s/AKfycbxXVvtOw9NSH-zyruDPdnvlayyX2RleJ_HKvNGx_NQE7OEArcSlqBlNs_-uNa5JuNFT9A/exec");
     final List data = response['data'];
     List<ShowCaseModel> listShowCase = [];
     for (var showcase in data) {
@@ -71,7 +73,6 @@ class ShowCaseBloc extends BlocModule {
       }
       listShowCase.add(
         ShowCaseModel(
-          // type: '',
           title: showcase['title'],
           artifact: artifactModel,
           codeArtifact: codeArtifact,

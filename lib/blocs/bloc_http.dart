@@ -14,21 +14,17 @@ class BlocHttp extends BlocModule {
   BlocHttp({
     required this.navigatorBloc,
   }) {
-    accessToken =
-        'Bearer ya29.a0AWY7CklNg5D_eStA61DpXzpFLsyhR5105t_8zX1rhp7dLYWlFTr1Osb_99NjEB11XxOtNrbDeQ8w4CaIaC_gauzViam9CKwGCrX-HVncAZbJiLvzIPB1LzSPWN1OLQYqykS32FNweTbD9ziDrvZ2k4myineuKAaCgYKAUkSARISFQG1tDrpYj9FSM5Z_6HSZizhEAHVBw0165';
+    accessToken = '';
   }
 
   Future<Map<String, dynamic>> create({
-    required String module,
-    required List parameters,
+ required String url,
+ required Map<String, dynamic> body,
   }) async {
-    final data = {'function': module, 'parameters': parameters};
-
     final httpService = HttpProvider(
       method: Methods.post,
-      accessToken: accessToken,
-      data: data,
-      //authBloc: authBloc,
+      url: url,
+      data: body,
       navigatorBloc: navigatorBloc,
     );
     try {
@@ -39,16 +35,11 @@ class BlocHttp extends BlocModule {
   }
 
   Future<Map<String, dynamic>> read({
-    required String module,
-    required List parameters,
+    required String url,
   }) async {
-    final data = {'function': module, 'parameters': parameters};
-
     final httpService = HttpProvider(
-      method: Methods.post,
-      accessToken: accessToken,
-      data: data,
-      //authBloc: authBloc,
+      method: Methods.get,
+      url: url,
       navigatorBloc: navigatorBloc,
     );
     return await httpService.launchUrl();
