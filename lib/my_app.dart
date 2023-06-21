@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           title: 'Arquetipo pragma',
           theme: snapshot.data,
+          debugShowCheckedModeBanner: false,
           routerDelegate: routerDelegate,
           routeInformationParser: routeInformationParser,
         );

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:aleteo_arquetipo/app_config.dart';
+import 'package:aleteo_arquetipo/blocs/theme_bloc.dart';
 
 import '../../../blocs/navigator_bloc.dart';
 import '../modules/show_case/blocs/create_artifact_bloc.dart';
@@ -39,6 +40,7 @@ class HttpProvider {
       showCaseBloc: blocCore.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
       createArtifactBloc: blocCore
           .getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
+      themeBloc: blocCore.getBlocModule<ThemeBloc>(ThemeBloc.name),
     ));
        return {'data': "Información guardada correctamente"};
     }

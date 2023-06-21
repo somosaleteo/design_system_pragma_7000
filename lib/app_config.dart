@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:aleteo_arquetipo/modules/show_case/blocs/create_artifact_bloc.dart';
 import 'package:flutter/material.dart';
-
 import 'blocs/bloc_drawer.dart';
 import 'blocs/bloc_http.dart';
 import 'blocs/bloc_processing.dart';
@@ -56,10 +55,9 @@ FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
       .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
       .setHomePageAndUpdate(
         ShowCaseHomePage(
-          showCaseBloc:
-              blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
-          createArtifactBloc: blocCoreInt
-              .getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
+          showCaseBloc: blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
+          createArtifactBloc: blocCoreInt.getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
+          themeBloc: blocCoreInt.getBlocModule<ThemeBloc>(ThemeBloc.name),
         ),
       );
   blocCoreInt
@@ -71,6 +69,7 @@ FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
       showCaseBloc: blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
       createArtifactBloc: blocCoreInt
           .getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
+      themeBloc: blocCoreInt.getBlocModule<ThemeBloc>(ThemeBloc.name),
     )
   };
 
@@ -110,6 +109,12 @@ Future<void> onboarding({
       ShowCaseBloc.name,
       ShowCaseBloc(
         blocHttp: blocCore.getBlocModule<BlocHttp>(BlocHttp.name),
+        drawerMainMenuBloc: blocCoreInt
+            .getBlocModule<DrawerMainMenuBloc>(DrawerMainMenuBloc.name),
+        drawerSecondaryMenuBloc:
+            blocCoreInt.getBlocModule<DrawerSecondaryMenuBloc>(
+          DrawerSecondaryMenuBloc.name,
+        ),
       ),
     );
     blocCoreInt.addBlocModule(
