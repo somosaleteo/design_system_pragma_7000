@@ -11,87 +11,113 @@ class CodeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     showCaseBloc.switchActiveLanguage(codes.first.language);
-    return SingleChildScrollView(
-      child: Container(
-        height: 200,
+    showCaseBloc.switchActiveCode(codes.first.code);
+    return Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
         color: Colors.black87,
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: codes.length,
-          itemBuilder: (context, index) {
-            final codeKey = codes[index].language;
-            final code = codes[index].code;
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                autofocus: true,
-                onTap: () {
-                  showCaseBloc.switchActiveLanguage(codeKey);
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Lenguaje: $codeKey',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Text(
-                      'Instrucciones: ${codes[index].instructions}',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SelectableText(
-                      code,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: InkWell(
-                        onTap: () async {
-                          Clipboard.setData(ClipboardData(text: code))
-                              .then((_) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Copied to clipboard !')));
-                          });
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(25),
+          bottomRight: Radius.circular(25),
+        ),
+      ),
+      child: StreamBuilder(
+          stream: showCaseBloc.activeLanguageStream,
+          builder: (BuildContext context, AsyncSnapshot data) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 50,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: codes.length,
+                    itemBuilder: (context, index) {
+                      final codeKey = codes[index].language;
+                      final code = codes[index].code;
+                      return InkWell(
+                        autofocus: true,
+                        onTap: () {
+                          showCaseBloc.switchActiveLanguage(codeKey);
+                          showCaseBloc.switchActiveCode(code);
                         },
-                        child: Container(
-                          alignment: Alignment.centerRight,
-                          height: 30,
-                          width: 70,
+                        child: DecoratedBox(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: Colors.white,
-                              width: 1,
-                            ),
+                            border: showCaseBloc.activeLanguage == codeKey
+                                ? const Border(
+                                    bottom: BorderSide(
+                                        color: Colors.white, width: 2))
+                                : null,
                           ),
-                          child: const Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'Copy code',
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.white54,
-                                  fontWeight: FontWeight.bold),
+                              codeKey != ''
+                                  ? codeKey[0].toUpperCase() +
+                                      codeKey.substring(1)
+                                  : '',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
+                      );
+                    },
+                  ),
                 ),
-              ),
+                const Divider(
+                  color: Colors.white,
+                ),
+                SelectableText(
+                  showCaseBloc.activeCode,
+                  style: const TextStyle(color: Colors.white),
+                ),
+                Container(
+                  width: double.infinity,
+                  alignment: Alignment.bottomRight,
+                  child: InkWell(
+                    onTap: () async {
+                      Clipboard.setData(
+                        ClipboardData(
+                          text: showCaseBloc.activeCode,
+                        ),
+                      ).then(
+                        (_) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Copied to clipboard !'),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(
+                          Icons.copy,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Copiar código',
+                          style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             );
-          },
-        ),
-      ),
+          }),
     );
   }
 }

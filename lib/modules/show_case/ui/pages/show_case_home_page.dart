@@ -1,4 +1,5 @@
 import 'package:aleteo_arquetipo/modules/show_case/blocs/create_artifact_bloc.dart';
+import 'package:aleteo_arquetipo/modules/show_case/blocs/template_show_case_model_bloc.dart';
 import 'package:aleteo_arquetipo/modules/show_case/ui/pages/form_artifact_page.dart';
 import 'package:flutter/material.dart';
 import '../../../../app_config.dart';
@@ -6,13 +7,19 @@ import '../../../../blocs/navigator_bloc.dart';
 import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
 import '../../blocs/show_case_bloc.dart';
 import '../widgets/button.dart';
-import 'template_show_case_page.dart';
 
 class ShowCaseHomePage extends StatelessWidget {
-  const ShowCaseHomePage({super.key, required this.showCaseBloc, required this.createArtifactBloc});
+  const ShowCaseHomePage(
+      {super.key,
+      required this.showCaseBloc,
+      required this.createArtifactBloc,
+      required this.templateShowCaseBloc,
+      required this.navigatorBloc});
 
   final ShowCaseBloc showCaseBloc;
   final CreateArtifactBloc createArtifactBloc;
+  final TemplateShowCaseBloc templateShowCaseBloc;
+  final NavigatorBloc navigatorBloc;
   @override
   Widget build(BuildContext context) {
     showCaseBloc.getShowCaseData();
@@ -34,19 +41,11 @@ class ShowCaseHomePage extends StatelessWidget {
                     final showCase = showCaseBloc.listShowCaseModel[index];
                     return ListTile(
                       onTap: () {
-                        blocCore
-                            .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
-                            .pushPageWidthTitle(
-                              showCase.title,
-                              'template_show_case',
-                              TemplateShowCase(
-                                showCaseBloc: showCaseBloc,
-                                showCaseModel:
-                                    showCaseBloc.listShowCaseModel[index],
-                              ),
-                            );
+                        showCaseBloc.showCaseModelActive =
+                            showCaseBloc.listShowCaseModel[index];
+                        navigatorBloc.pushNamed(TemplateShowCaseBloc.name);
                       },
-                      title: Text(showCase.title),
+                      title: Text(showCase.artifact.type),
                     );
                   },
                 );
@@ -54,14 +53,16 @@ class ShowCaseHomePage extends StatelessWidget {
             ),
             Button(
               title: 'New Artifact',
-              onPressed: (){
+              onPressed: () {
                 blocCore
-                  .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
-                  .pushPageWidthTitle(
-                    'Artifact',
-                    'formArtifact',
-                     FormArtifact(createArtifactBloc: createArtifactBloc,),
-                  );
+                    .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
+                    .pushPageWidthTitle(
+                      'Artifact',
+                      'formArtifact',
+                      FormArtifact(
+                        createArtifactBloc: createArtifactBloc,
+                      ),
+                    );
               },
             ),
           ],

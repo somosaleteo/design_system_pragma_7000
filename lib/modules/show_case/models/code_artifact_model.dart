@@ -5,25 +5,40 @@ class CodeArtifactModel extends EntityModel {
   final String language;
   final String code;
   final String instructions;
+  final String variant;
 
   const CodeArtifactModel({
     required this.type,
     required this.language,
     required this.code,
     required this.instructions,
+    required this.variant,
   });
 
   @override
-  EntityModel copyWith(
-      {String? typeTmp,
-      String? languageTmp,
-      String? codeTmp,
-      String? instructionsTmp}) {
+  EntityModel copyWith({
+    String? typeTmp,
+    String? languageTmp,
+    String? codeTmp,
+    String? instructionsTmp,
+    String? variantTmp,
+  }) {
     return CodeArtifactModel(
       type: typeTmp ?? type,
       language: languageTmp ?? language,
       code: codeTmp ?? code,
       instructions: instructionsTmp ?? instructions,
+      variant: variantTmp ?? variant,
+    );
+  }
+
+  factory CodeArtifactModel.empty() {
+    return const CodeArtifactModel(
+      type: '',
+      language: '',
+      code: '',
+      instructions: '',
+      variant: '',
     );
   }
 
@@ -33,6 +48,7 @@ class CodeArtifactModel extends EntityModel {
       'language': language,
       'code': code,
       'instruction': instructions,
+      'variant': variant
     };
   }
 
@@ -52,6 +68,7 @@ class CodeArtifactModel extends EntityModel {
       language: json['language'] ?? '',
       code: json['code'] ?? '',
       instructions: json['instructions'] ?? '',
+      variant: json['variant'] ?? '',
     );
   }
 }

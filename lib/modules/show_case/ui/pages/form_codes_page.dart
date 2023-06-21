@@ -75,7 +75,7 @@ class FormCodeArtifact extends StatelessWidget {
                       type: createArtifactBloc.title,
                       language: language,
                       code: code,
-                      instructions: instructions,
+                      instructions: instructions, variant: '',
                     );
                     createArtifactBloc.addCode(codeArtifactModel);
                     createArtifactBloc.clearInputsCodeForm();
