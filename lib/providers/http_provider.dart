@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import '../../../blocs/navigator_bloc.dart';
 import '../modules/show_case/blocs/show_case_bloc.dart';
 import '../services/http_service.dart';

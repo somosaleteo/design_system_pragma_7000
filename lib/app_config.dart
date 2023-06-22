@@ -54,21 +54,18 @@ FutureOr<void> demoInsert(BlocCore<dynamic> blocCoreInt) async {
 }
 
 FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
-  ShowCaseBloc showCaseBloc =
-      blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name);
-  TemplateShowCaseBloc templateShowCaseBloc = blocCoreInt
-      .getBlocModule<TemplateShowCaseBloc>(TemplateShowCaseBloc.name);
-  CreateArtifactBloc createArtifactBloc =
-      blocCoreInt.getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name);
-  NavigatorBloc navigatorBloc =
-      blocCoreInt.getBlocModule<NavigatorBloc>(NavigatorBloc.name);
-  
+  ShowCaseBloc showCaseBloc = blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name);
+  TemplateShowCaseBloc templateShowCaseBloc = blocCoreInt.getBlocModule<TemplateShowCaseBloc>(TemplateShowCaseBloc.name);
+  CreateArtifactBloc createArtifactBloc = blocCoreInt.getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name);
+  NavigatorBloc navigatorBloc = blocCoreInt.getBlocModule<NavigatorBloc>(NavigatorBloc.name);
+  ThemeBloc themeBloc = blocCoreInt.getBlocModule<ThemeBloc>(ThemeBloc.name);
   
   final ShowCaseHomePage showCaseHomePage = ShowCaseHomePage(
     navigatorBloc: navigatorBloc,
     createArtifactBloc: createArtifactBloc,
     showCaseBloc: showCaseBloc,
     templateShowCaseBloc: templateShowCaseBloc,
+    themeBloc: themeBloc,
   );
 
   final TemplateShowCase templateShowCasePage = TemplateShowCase(
@@ -108,14 +105,16 @@ Future<void> onboarding({
     blocCore.addBlocModule<BlocHttp>(
       BlocHttp.name,
       BlocHttp(
-        navigatorBloc:
-            blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
+        navigatorBloc: blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
       ),
     );
     blocCoreInt.addBlocModule(
       ShowCaseBloc.name,
       ShowCaseBloc(
         blocHttp: blocCore.getBlocModule<BlocHttp>(BlocHttp.name),
+        drawerMainMenuBloc: blocCoreInt.getBlocModule<DrawerMainMenuBloc>(DrawerMainMenuBloc.name),
+        drawerSecondaryMenuBloc: blocCoreInt.getBlocModule<DrawerSecondaryMenuBloc>(DrawerSecondaryMenuBloc.name),
+        navigatorBloc: blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
       ),
     );
 

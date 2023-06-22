@@ -73,40 +73,53 @@ class TemplateShowCase extends StatelessWidget {
               style: textStyleParagraphs,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
-                  children: [
-                    CardUseWidget(
-                      type: 'recomendation',
-                      image: showCaseModel.useArtifactModel.recomendationImage,
-                    ),
-                    Text(
-                      'Recomendación',
-                      style: textStyleParagraphs.copyWith(
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Text(
-                      showCaseModel.useArtifactModel.recomendationDescription,
-                      style: textStyleParagraphs,
-                    ),
-                  ],
+                Expanded(
+                  child: CardUseWidget(
+                    type: 'recomendation',
+                    image: showCaseModel.useArtifactModel.recomendationImage,
+                  ),
                 ),
-                Column(
-                  children: [
-                    CardUseWidget(
-                      type: 'avoid',
-                      image: showCaseModel.useArtifactModel.avoidDescription,
-                    ),
-                    Text(
-                      'Evitar',
-                      style: textStyleParagraphs.copyWith(
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Text(
-                      showCaseModel.useArtifactModel.avoidDescription,
-                      style: textStyleParagraphs,
-                    ),
-                  ],
+                Expanded(
+                  child: CardUseWidget(
+                    type: 'avoid',
+                    image: showCaseModel.useArtifactModel.avoidDescription,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Recomendación',
+                        style: textStyleParagraphs.copyWith(
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        showCaseModel.useArtifactModel.recomendationDescription,
+                        style: textStyleParagraphs,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Evitar',
+                        style: textStyleParagraphs.copyWith(
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        showCaseModel.useArtifactModel.avoidDescription,
+                        style: textStyleParagraphs,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -123,13 +136,16 @@ class TemplateShowCase extends StatelessWidget {
                   color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
-              child: SizedBox(
+              child: const SizedBox(
                 width: double.infinity,
                 height: 300,
                 child: Center(
-                  child: CachedNetworkImage(
+                  child: Icon(
+                    Icons.image_not_supported,
+                    size: 100,
+                  ), /* CachedNetworkImage(
                     imageUrl: showCaseModel.artifact.anatomyImage,
-                  ),
+                  ), */
                 ),
               ),
             ),
@@ -201,39 +217,36 @@ class CardUseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            border: Border.all(
-              color: type == 'recomendation' ? Colors.green[400]! : Colors.red,
+        Align(
+          alignment: Alignment.center,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+              border: Border.all(
+                color: type == 'recomendation' ? Colors.green[400]! : Colors.red,
+              ),
             ),
-          ),
-          child: const SizedBox(
-            width: 300,
-            height: 200,
-            child: Center(
-                // child: NetworkImage(
-                //   image,
-                // ),
-                ),
+            child: const SizedBox(
+              width: 300,
+              height: 200,
+              child: Center(
+                  // child: NetworkImage(
+                  //   image,
+                  // ),
+                  ),
+            ),
           ),
         ),
         Align(
           alignment: Alignment.topCenter,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: type == 'recomendation' ? Colors.green[400]! : Colors.red,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(100),
-              ),
-            ),
-            child: Center(
-              child: Icon(
-                type == 'recomendation' ? Icons.check_sharp : Icons.clear,
-              ),
+          child: CircleAvatar(
+            backgroundColor: type == 'recomendation' ? Colors.green[400]! : Colors.red,
+            child: Icon(
+              type == 'recomendation' ? Icons.check_sharp : Icons.clear,
             ),
           ),
-        )
+        ),
       ],
     );
   }
