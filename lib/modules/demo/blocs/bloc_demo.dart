@@ -61,12 +61,12 @@ class BlocDemo extends BlocModule {
     String description = '',
     IconData icondata = Icons.question_mark,
   }) {
-    _drawerMainMenuBloc.addDrawerOptionMenu(
+    /* _drawerMainMenuBloc.addDrawerOptionMenu(
       onPressed: onPressed,
       description: description,
       title: title,
       icondata: icondata,
-    );
+    ); */
   }
 
   void addMainOptionWithSecondaryOptions() {
@@ -115,12 +115,12 @@ class BlocDemo extends BlocModule {
   }
 
   void addMainOption() {
-    _drawerMainMenuBloc.addDrawerOptionMenu(
+ /*    _drawerMainMenuBloc.addDrawerOptionMenu(
       onPressed: () {
         addMainOptionWithSecondaryOptions();
       },
       title: 'Main Option',
       icondata: Icons.add_circle,
-    );
+    ); */
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:aleteo_arquetipo/modules/show_case/blocs/create_artifact_bloc.dart';
+import 'package:aleteo_arquetipo/modules/show_case/ui/widgets/library_layout_design_system.dart';
 import 'package:flutter/material.dart';
 import 'blocs/bloc_drawer.dart';
 import 'blocs/bloc_http.dart';
@@ -13,6 +14,7 @@ import 'entities/entity_bloc.dart';
 import 'modules/show_case/blocs/show_case_bloc.dart';
 import 'modules/demo/blocs/bloc_demo.dart';
 import 'modules/demo/ui/pages/demo_home_page.dart';
+import 'modules/show_case/ui/pages/layout_page.dart';
 import 'modules/show_case/ui/pages/show_case_home_page.dart';
 import 'providers/my_app_navigator_provider.dart';
 import 'services/theme_config.dart';
@@ -55,8 +57,10 @@ FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
       .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
       .setHomePageAndUpdate(
         ShowCaseHomePage(
-          showCaseBloc: blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
-          createArtifactBloc: blocCoreInt.getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
+          showCaseBloc:
+              blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
+          createArtifactBloc: blocCoreInt
+              .getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
           themeBloc: blocCoreInt.getBlocModule<ThemeBloc>(ThemeBloc.name),
         ),
       );
@@ -70,7 +74,9 @@ FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
       createArtifactBloc: blocCoreInt
           .getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
       themeBloc: blocCoreInt.getBlocModule<ThemeBloc>(ThemeBloc.name),
-    )
+    ),
+    'layoutDesignSystem': const LibraryLayoutDesignSystem(),
+    'mainPage': const LayoutPage(),
   };
 
   blocCore
@@ -109,12 +115,9 @@ Future<void> onboarding({
       ShowCaseBloc.name,
       ShowCaseBloc(
         blocHttp: blocCore.getBlocModule<BlocHttp>(BlocHttp.name),
-        drawerMainMenuBloc: blocCoreInt
-            .getBlocModule<DrawerMainMenuBloc>(DrawerMainMenuBloc.name),
-        drawerSecondaryMenuBloc:
-            blocCoreInt.getBlocModule<DrawerSecondaryMenuBloc>(
-          DrawerSecondaryMenuBloc.name,
-        ),
+        drawerMainMenuBloc: blocCoreInt.getBlocModule<DrawerMainMenuBloc>(DrawerMainMenuBloc.name),
+        drawerSecondaryMenuBloc: blocCoreInt.getBlocModule<DrawerSecondaryMenuBloc>(DrawerSecondaryMenuBloc.name),
+        navigatorBloc: blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
       ),
     );
     blocCoreInt.addBlocModule(

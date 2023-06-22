@@ -45,13 +45,15 @@ class DrawerMainMenuBloc extends BlocModule {
   void addDrawerOptionMenu({
     required VoidCallback onPressed,
     required String title,
-    required IconData icondata,
+    required List<Widget> secondaryOptionList,
+    IconData? icondata,
     String description = '',
   }) {
     final List<DrawerOptionWidget> tmpList = <DrawerOptionWidget>[];
     final DrawerOptionWidget optionWidget = DrawerOptionWidget(
       onPressed: onPressed,
       title: title,
+      secondaryOptionList: secondaryOptionList,
       icondata: icondata,
       description: description,
     );

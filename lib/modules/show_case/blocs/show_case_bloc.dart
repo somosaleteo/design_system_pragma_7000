@@ -2,33 +2,39 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../../blocs/bloc_drawer.dart';
 import '../../../blocs/bloc_http.dart';
-import '../../../blocs/bloc_secondary_drawer.dart';
+import '../../../blocs/navigator_bloc.dart';
 import '../../../entities/entity_bloc.dart';
+import '../../../blocs/bloc_secondary_drawer.dart';
 import '../models/artifact_model.dart';
+import '../models/show_case_model.dart';
 import '../models/code_artifact_model.dart';
 import '../models/properties_artifact_model.dart';
-import '../models/show_case_model.dart';
+import '../ui/pages/layout_page.dart';
+import '../ui/widgets/secondary_option_menu.dart';
 
 class ShowCaseBloc extends BlocModule {
-  static const String name = 'showCaseBloc';
-  late BlocGeneral<List<ShowCaseModel>> _listShowCaseModel;
-  late BlocGeneral<String> _activeLanguage;
-  late DrawerMainMenuBloc _drawerMainMenuBloc;
-  late DrawerSecondaryMenuBloc _drawerSecondaryMenuBloc;
-
-  final BlocHttp blocHttp;
-
   ShowCaseBloc({
     required this.blocHttp,
     required DrawerMainMenuBloc drawerMainMenuBloc,
     required DrawerSecondaryMenuBloc drawerSecondaryMenuBloc,
+    required NavigatorBloc navigatorBloc,
   }) {
     _listShowCaseModel = BlocGeneral<List<ShowCaseModel>>([]);
     _activeLanguage = BlocGeneral<String>('');
     _drawerMainMenuBloc = drawerMainMenuBloc;
     _drawerSecondaryMenuBloc = drawerSecondaryMenuBloc;
+    _navigatorBloc = navigatorBloc;
     addMainOption();
   }
+
+  static const String name = 'showCaseBloc';
+  late DrawerMainMenuBloc _drawerMainMenuBloc;
+  late DrawerSecondaryMenuBloc _drawerSecondaryMenuBloc;
+  late NavigatorBloc _navigatorBloc;
+  late BlocGeneral<List<ShowCaseModel>> _listShowCaseModel;
+  late BlocGeneral<String> _activeLanguage;
+
+  final BlocHttp blocHttp;
 
   List<ShowCaseModel> get listShowCaseModel => _listShowCaseModel.value;
   Stream<List<ShowCaseModel>> get listShowCaseModelStream =>
@@ -54,95 +60,161 @@ class ShowCaseBloc extends BlocModule {
   void addDrawerOptionMenu({
     required void Function() onPressed,
     required String title,
+    required List<Widget> secondaryOptionList,
     String description = '',
     IconData icondata = Icons.question_mark,
   }) {
     _drawerMainMenuBloc.addDrawerOptionMenu(
       onPressed: onPressed,
       title: title,
+      secondaryOptionList: secondaryOptionList,
       icondata: icondata,
     );
   }
 
-  void addMainOptionWithSecondaryOptions() {
-    addSecondaryDrawerOptionMenu(
-      onPressed: () {},
-      title: 'Increment Counter',
-      icondata: Icons.add_circle,
-    );
-    addSecondaryDrawerOptionMenu(
-      onPressed: () {},
-      title: 'Decrement Counter',
-      icondata: Icons.remove_circle,
-    );
-    addSecondaryDrawerOptionMenu(
-      onPressed: () {},
-      title: 'reset Counter',
-      icondata: Icons.refresh,
-    );
-    addSecondaryDrawerOptionMenu(
-      onPressed: () {
-        _drawerMainMenuBloc.removeDrawerOptionMenu('Main Option');
-      },
-      title: 'Remove MainOption',
-      icondata: Icons.remove,
-    );
-    addSecondaryDrawerOptionMenu(
-      onPressed: () {
-        _drawerMainMenuBloc.clearMainDrawer();
-        addSecondaryDrawerOptionMenu(
-          onPressed: () {
-            addMainOption();
-          },
-          title: 'Add MainOption',
-          icondata: Icons.add,
-        );
-      },
-      title: 'Remove MainDrawer',
-      icondata: Icons.garage,
-    );
+  List<Widget> secondaryOptionStartDesign() {
+    return [
+      SecondaryOptionMenu(
+        text: 'Instalación librería',
+        onTap: () {
+          _navigatorBloc.pushPageWidthTitle(
+            'Empieza a usar una librería',
+            'LayoutPage',
+            const LayoutPage(),
+          );
+        },
+      ),
+      SecondaryOptionMenu(
+        text: 'Colaboración',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Personalización',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Reutilizar componentes',
+        onTap: () {},
+      ),
+    ];
+  }
+
+  List<Widget> secondaryOptionComponents() {
+    return [
+      SecondaryOptionMenu(
+        text: 'Accordion',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Avatar',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Button',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Icon button',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Breadcrumbs',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Calendar',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Card',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Filters',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Inputs',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Loading',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Pagination',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Radio button',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Search',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Stepper',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Tabs',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Tables',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Tags',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Text area',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Toast',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Toggle',
+        onTap: () {},
+      ),
+      SecondaryOptionMenu(
+        text: 'Tooltip',
+        onTap: () {},
+      ),
+    ];
   }
 
   void addMainOption() {
     _drawerMainMenuBloc.addDrawerOptionMenu(
-      onPressed: () {
-        addMainOptionWithSecondaryOptions();
-      },
+      onPressed: () {},
       title: 'Empieza a diseñar',
-      icondata: Icons.add_circle,
+      secondaryOptionList: secondaryOptionStartDesign(),
     );
     _drawerMainMenuBloc.addDrawerOptionMenu(
-      onPressed: () {
-        addMainOptionWithSecondaryOptions();
-      },
+      onPressed: () {},
       title: 'Empieza a desarrollar',
-      icondata: Icons.add_circle,
+      secondaryOptionList: [],
     );
     _drawerMainMenuBloc.addDrawerOptionMenu(
-      onPressed: () {
-        addMainOptionWithSecondaryOptions();
-      },
+      onPressed: () {},
       title: 'Guía de estilos',
-      icondata: Icons.add_circle,
+      secondaryOptionList: [],
     );
     _drawerMainMenuBloc.addDrawerOptionMenu(
-      onPressed: () {
-        addMainOptionWithSecondaryOptions();
-      },
+      onPressed: () {},
       title: 'Componentes',
-      icondata: Icons.add_circle,
+      secondaryOptionList: secondaryOptionComponents(),
     );
     _drawerMainMenuBloc.addDrawerOptionMenu(
-      onPressed: () {
-        addMainOptionWithSecondaryOptions();
-      },
+      onPressed: () {},
       title: 'Componentes #Pragma7000',
-      icondata: Icons.add_circle,
+      secondaryOptionList: [],
     );
   }
-
-  @override
-  FutureOr<void> dispose() {}
 
   void switchActiveLanguage(String language) {
     _activeLanguage.value = language;
@@ -197,4 +269,7 @@ class ShowCaseBloc extends BlocModule {
       _listShowCaseModel.value = listShowCase;
     }
   }
+
+  @override
+  FutureOr<void> dispose() {}
 }

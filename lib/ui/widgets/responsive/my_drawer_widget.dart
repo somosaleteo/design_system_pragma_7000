@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../../blocs/bloc_drawer.dart';
+import '../../../modules/show_case/ui/widgets/menu_header.dart';
 import 'list_tile_drawer_widget.dart';
 
 class MyDrawerWidget extends StatelessWidget {
@@ -16,10 +16,8 @@ class MyDrawerWidget extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          DrawerHeader(
-            child: Center(
-              child: Image.asset(drawerMainMenuBloc.mainCover),
-            ),
+          const DrawerHeader(
+            child: MenuHeader(),
           ),
           ...drawerMainMenuBloc.listMenuOptions,
           const ListTileExitDrawerWidget()
