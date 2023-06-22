@@ -48,6 +48,7 @@ class DrawerMainMenuBloc extends BlocModule {
     required Widget secondaryOption,
     IconData? icondata,
     String description = '',
+    bool? isExpanded,
   }) {
     final List<DrawerOptionWidget> tmpList = <DrawerOptionWidget>[];
     final DrawerOptionWidget optionWidget = DrawerOptionWidget(
@@ -56,6 +57,7 @@ class DrawerMainMenuBloc extends BlocModule {
       secondaryOption: secondaryOption,
       icondata: icondata,
       description: description,
+      isExpanded: isExpanded,
     );
     for (final DrawerOptionWidget option in _drawerMainMenu.value) {
       if (option.title != title) {

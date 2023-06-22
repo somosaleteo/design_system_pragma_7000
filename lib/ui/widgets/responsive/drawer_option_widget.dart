@@ -6,15 +6,17 @@ class DrawerOptionWidget extends StatelessWidget {
     required this.title,
     required this.secondaryOption,
     this.icondata,
+    this.isExpanded,
     this.description = '',
     this.getOutOnTap = true,
     super.key,
   });
   final VoidCallback onPressed;
   final String title, description;
-  final IconData? icondata;
-  final bool getOutOnTap;
   final Widget secondaryOption;
+  final IconData? icondata;
+  final bool? isExpanded;
+  final bool getOutOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +27,11 @@ class DrawerOptionWidget extends StatelessWidget {
       ),
       shape: const Border(),
       childrenPadding: const EdgeInsets.only(left: 25.0),
+      initiallyExpanded: isExpanded ?? false,
       children: [secondaryOption],
     );
 
-  /*ListTile(
+    /*ListTile(
       iconColor: Theme.of(context).splashColor,
       onTap: () {
         onPressed();

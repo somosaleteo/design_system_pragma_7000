@@ -49,6 +49,7 @@ class MainOptionMenuWidget extends StatelessWidget {
                   title: e.title,
                   secondaryOption: e.secondaryOption,
                   icondata: e.icondata,
+                  isExpanded: e.isExpanded,
                   getOutOnTap: false,
                 );
               }),

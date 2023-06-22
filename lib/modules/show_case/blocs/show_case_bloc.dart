@@ -90,11 +90,15 @@ class ShowCaseBloc extends BlocModule {
   }
 
   Widget secondaryOptionStartDesign() {
+    final focusNode = FocusNode();
     return Column(
       children: [
         SecondaryOptionMenu(
           text: 'Instalación librería',
+          focusNode: focusNode,
+          isAutoFocus: true,
           onTap: () {
+            focusNode.requestFocus();
             _navigatorBloc.pushPageWidthTitle(
               'Empieza a usar una librería',
               'LayoutPage',
@@ -151,6 +155,7 @@ class ShowCaseBloc extends BlocModule {
     _drawerMainMenuBloc.addDrawerOptionMenu(
       onPressed: () {},
       title: 'Empieza a diseñar',
+      isExpanded: true,
       secondaryOption: secondaryOptionStartDesign(),
     );
     _drawerMainMenuBloc.addDrawerOptionMenu(
