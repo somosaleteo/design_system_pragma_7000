@@ -17,9 +17,6 @@ class FormArtifact extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     createArtifactBloc.clearShowCaseModel();
-    int width = 0;
-    int height = 0;
-    int radius = 0;
     String image = '';
     return MyAppScaffold(
       withAppbar: true,
@@ -43,7 +40,6 @@ class FormArtifact extends StatelessWidget {
             CustomAutoCompleteInputWidget(
               label: 'Width',
               onEditingValueFunction: (val) {
-                width = int.parse(val);
               },
               onEditingValidateFunction: (val) {
                 String? messageError =
@@ -55,7 +51,6 @@ class FormArtifact extends StatelessWidget {
             CustomAutoCompleteInputWidget(
               label: 'Height',
               onEditingValueFunction: (val) {
-                height = int.parse(val);
               },
               onEditingValidateFunction: (val) {
                 String? messageError =
@@ -67,7 +62,6 @@ class FormArtifact extends StatelessWidget {
             CustomAutoCompleteInputWidget(
               label: 'Radius',
               onEditingValueFunction: (val) {
-                radius = int.parse(val);
               },
               onEditingValidateFunction: (val) {
                 String? messageError =
@@ -96,13 +90,12 @@ class FormArtifact extends StatelessWidget {
               onPressed: () {
                 ArtifactModel artifactModel = ArtifactModel(
                   type: createArtifactBloc.title,
-                  height: height,
-                  radius: radius,
-                  width: width,
                   image: image,
+                  anatomyImage: '',
+                  description: '',
                 );
                 createArtifactBloc.artifactModel = artifactModel;
-        
+
                 blocCore
                     .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
                     .pushPageWidthTitle(

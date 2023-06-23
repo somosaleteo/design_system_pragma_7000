@@ -1,10 +1,6 @@
 import 'dart:convert';
-import 'package:aleteo_arquetipo/app_config.dart';
-
 import '../../../blocs/navigator_bloc.dart';
-import '../modules/show_case/blocs/create_artifact_bloc.dart';
 import '../modules/show_case/blocs/show_case_bloc.dart';
-import '../modules/show_case/ui/pages/show_case_home_page.dart';
 import '../services/http_service.dart';
 import 'package:http/http.dart' as http;
 import '../utils/methods_enum.dart';
@@ -34,22 +30,17 @@ class HttpProvider {
     final http.StreamedResponse response = await httpService.launchUrl();
 
     final responseData = await response.stream.bytesToString();
-    if (response.statusCode == 302 && response.reasonPhrase == 'Moved Temporarily') {
-       navigatorBloc.pushPage('Home Page', ShowCaseHomePage(
-      showCaseBloc: blocCore.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
-      createArtifactBloc: blocCore
-          .getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
-    ));
-       return {'data': "Información guardada correctamente"};
+    if (response.statusCode == 302 &&
+        response.reasonPhrase == 'Moved Temporarily') {
+      navigatorBloc.pushNamed(ShowCaseBloc.name);
+      return {'data': "Información guardada correctamente"};
     }
     final Map<String, dynamic> responseDataJson = jsonDecode(responseData);
-    
+
     if (response.statusCode == 200) {
       return {'data': responseDataJson["data"]};
     }
 
     throw Exception('error al consultar la información');
   }
-
-
 }

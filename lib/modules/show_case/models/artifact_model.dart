@@ -3,46 +3,45 @@ import 'package:aleteo_arquetipo/entities/entity_model.dart';
 class ArtifactModel extends EntityModel {
   const ArtifactModel({
     required this.type,
-    required this.height,
-    required this.radius,
-    required this.width,
     required this.image,
+    required this.description,
+    required this.anatomyImage,
   });
 
   final String type;
-  final int width;
-  final int height;
-  final int radius;
   final String image;
+  final String description;
+  final String anatomyImage;
 
   factory ArtifactModel.empty() {
     return const ArtifactModel(
-        type: '', height: 0, radius: 0, width: 0, image: '');
+      anatomyImage: '',
+      description: '',
+      image: '',
+      type: '',
+    );
   }
 
   @override
   EntityModel copyWith(
       {String? typeTmp,
-      int? heightTmp,
-      int? radiusTmp,
-      int? widthTmp,
+      String? anatomyImageTpm,
+      String? descriptionTpm,
       String? imageTmp}) {
     return ArtifactModel(
       type: typeTmp ?? type,
-      height: heightTmp ?? height,
-      radius: radiusTmp ?? radius,
-      width: widthTmp ?? width,
       image: imageTmp ?? image,
+      anatomyImage: anatomyImageTpm ?? anatomyImage,
+      description: descriptionTpm ?? description,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'heigth': height,
-      'radius': radius,
-      'width': width,
+      'type': type,
       'image': image,
+      'anatomyImage': anatomyImage
     };
   }
 
@@ -54,15 +53,14 @@ class ArtifactModel extends EntityModel {
   }
 
   @override
-  int get hashCode => '$type$image$height$radius$width'.hashCode;
+  int get hashCode => '$type$image$anatomyImage$description'.hashCode;
 
   static fromJson(Map<String, dynamic> json) {
     return ArtifactModel(
       type: json['type'] ?? '',
-      height: json['height'] ?? 0,
-      radius: json['radius'] ?? 0,
-      width: json['width'] ?? 0,
       image: json['image'] ?? '',
+      anatomyImage: json['anatomyImage'] ?? '',
+      description: json['description'] ?? '',
     );
   }
 }

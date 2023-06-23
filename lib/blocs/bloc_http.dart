@@ -42,7 +42,8 @@ class BlocHttp extends BlocModule {
       url: url,
       navigatorBloc: navigatorBloc,
     );
-    return await httpService.launchUrl();
+    final response = await httpService.launchUrl();
+    return response;
   }
 
   update() {}

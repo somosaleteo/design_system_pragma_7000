@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:aleteo_arquetipo/modules/show_case/blocs/create_artifact_bloc.dart';
+import 'package:aleteo_arquetipo/modules/show_case/blocs/template_show_case_model_bloc.dart';
+import 'package:aleteo_arquetipo/modules/show_case/ui/pages/template_show_case_page.dart';
 import 'package:flutter/material.dart';
 
 import 'blocs/bloc_drawer.dart';
@@ -52,31 +54,32 @@ FutureOr<void> demoInsert(BlocCore<dynamic> blocCoreInt) async {
 }
 
 FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
-  blocCoreInt
-      .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
-      .setHomePageAndUpdate(
-        ShowCaseHomePage(
-          showCaseBloc:
-              blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
-          createArtifactBloc: blocCoreInt
-              .getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
-        ),
-      );
-  blocCoreInt
-      .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
-      .setTitle('Show Case Home');
+  ShowCaseBloc showCaseBloc = blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name);
+  TemplateShowCaseBloc templateShowCaseBloc = blocCoreInt.getBlocModule<TemplateShowCaseBloc>(TemplateShowCaseBloc.name);
+  CreateArtifactBloc createArtifactBloc = blocCoreInt.getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name);
+  NavigatorBloc navigatorBloc = blocCoreInt.getBlocModule<NavigatorBloc>(NavigatorBloc.name);
+  ThemeBloc themeBloc = blocCoreInt.getBlocModule<ThemeBloc>(ThemeBloc.name);
+  
+  final ShowCaseHomePage showCaseHomePage = ShowCaseHomePage(
+    navigatorBloc: navigatorBloc,
+    createArtifactBloc: createArtifactBloc,
+    showCaseBloc: showCaseBloc,
+    templateShowCaseBloc: templateShowCaseBloc,
+    themeBloc: themeBloc,
+  );
 
+  final TemplateShowCase templateShowCasePage = TemplateShowCase(
+    showCaseBloc: showCaseBloc,
+    templateShowCaseBloc: templateShowCaseBloc,
+  );
+  navigatorBloc.setHomePageAndUpdate(showCaseHomePage);
+  navigatorBloc.setTitle('Show Case Home');
   Map<String, Widget> availablePages = {
-    ShowCaseBloc.name: ShowCaseHomePage(
-      showCaseBloc: blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name),
-      createArtifactBloc: blocCoreInt
-          .getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name),
-    )
+    ShowCaseBloc.name: showCaseHomePage,
+    TemplateShowCaseBloc.name: templateShowCasePage
   };
 
-  blocCore
-      .getBlocModule<NavigatorBloc>(NavigatorBloc.name)
-      .addPagesForDynamicLinksDirectory(availablePages);
+  navigatorBloc.addPagesForDynamicLinksDirectory(availablePages);
 }
 
 Future<void> onboarding({
@@ -102,15 +105,22 @@ Future<void> onboarding({
     blocCore.addBlocModule<BlocHttp>(
       BlocHttp.name,
       BlocHttp(
-        navigatorBloc:
-            blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
+        navigatorBloc: blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
       ),
     );
     blocCoreInt.addBlocModule(
       ShowCaseBloc.name,
       ShowCaseBloc(
         blocHttp: blocCore.getBlocModule<BlocHttp>(BlocHttp.name),
+        drawerMainMenuBloc: blocCoreInt.getBlocModule<DrawerMainMenuBloc>(DrawerMainMenuBloc.name),
+        drawerSecondaryMenuBloc: blocCoreInt.getBlocModule<DrawerSecondaryMenuBloc>(DrawerSecondaryMenuBloc.name),
+        navigatorBloc: blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
       ),
+    );
+
+    blocCoreInt.addBlocModule(
+      TemplateShowCaseBloc.name,
+      TemplateShowCaseBloc(),
     );
     blocCoreInt.addBlocModule(
       CreateArtifactBloc.name,

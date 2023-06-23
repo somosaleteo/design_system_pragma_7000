@@ -51,13 +51,13 @@ class _TestScreenWidgetsPageState extends State<TestScreenWidgetsPage> {
     );
     widget.drawerSecondaryMenuBloc.addSecondaryDrawerOptionMenu(
       onPressed: () {
-        widget.drawerMainMenuBloc.addDrawerOptionMenu(
+        /* widget.drawerMainMenuBloc.addDrawerOptionMenu(
           onPressed: () {
             widget.drawerMainMenuBloc.removeDrawerOptionMenu('Menu 1');
           },
           title: 'Menu 1',
           icondata: Icons.remove_rounded,
-        );
+        ); */
       },
       title: 'add',
       icondata: Icons.add,

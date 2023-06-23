@@ -40,13 +40,11 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Temporales de windows
-Thumbs.db
-thumbs.db
-pubspec.lock
-windows/flutter/generated_plugin_registrant.cc
-windows/flutter/generated_plugin_registrant.h
-windows/flutter/generated_plugins.cmake
-windows/flutter/generated_plugin_registrant.cc
-windows/flutter/generated_plugin_registrant.h
-windows/flutter/generated_plugins.cmake
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+/linux
+/macos
+/windows

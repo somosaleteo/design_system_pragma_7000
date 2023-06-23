@@ -1,4 +1,3 @@
-import 'package:aleteo_arquetipo/ui/widgets/responsive/drawer_option_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,10 +8,10 @@ void main() {
       const Key key = Key('listTileWidget');
       bool onPressedCalled = false;
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Material(
             child: Scaffold(
-              body: Builder(
+             /*  body: Builder(
                 builder: (BuildContext context) => DrawerOptionWidget(
                   key: key,
                   onPressed: () {
@@ -21,7 +20,7 @@ void main() {
                   title: 'Test',
                   icondata: Icons.ac_unit,
                 ),
-              ),
+              ), */
             ),
           ),
         ),

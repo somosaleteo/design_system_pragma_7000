@@ -2,7 +2,6 @@
 
 import 'package:aleteo_arquetipo/blocs/bloc_drawer.dart';
 import 'package:aleteo_arquetipo/ui/widgets/responsive/drawer_option_widget.dart';
-import 'package:flutter/material.dart';
 
 void testMe() {}
 
@@ -11,7 +10,7 @@ class MockDrawerMainMenuBloc extends DrawerMainMenuBloc {
   Stream<List<DrawerOptionWidget>> get listDrawerOptionSizeStream =>
       Stream<List<DrawerOptionWidget>>.value(listMenuOptions);
 
-  @override
+/*   @override
   List<DrawerOptionWidget> get listMenuOptions => <DrawerOptionWidget>[
         const DrawerOptionWidget(
           title: 'title',
@@ -19,12 +18,12 @@ class MockDrawerMainMenuBloc extends DrawerMainMenuBloc {
           description: 'description',
           icondata: Icons.add,
         )
-      ];
+      ]; */
 
   @override
   void clearMainDrawer() {}
 
-  @override
+/*   @override
   void addDrawerOptionMenu({
     VoidCallback onPressed = testMe,
     String title = 'Prueba',
@@ -40,7 +39,7 @@ class MockDrawerMainMenuBloc extends DrawerMainMenuBloc {
       description: description,
       icondata: icondata,
     ));
-  }
+  } */
 
   @override
   void removeDrawerOptionMenu(String title) {}

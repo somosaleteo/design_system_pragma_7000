@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../../../blocs/bloc_drawer.dart';
 import '../../../blocs/bloc_responsive.dart';
+import '../../../modules/show_case/ui/widgets/menu_header.dart';
 import 'drawer_option_widget.dart';
 
 class MainOptionMenuWidget extends StatelessWidget {
@@ -21,7 +21,7 @@ class MainOptionMenuWidget extends StatelessWidget {
 
     final DrawerMainMenuBloc menuBloc = drawerMainMenuBloc;
     final Size size = Size(
-      (responsiveBloc.size.width * 0.15).clamp(150, 200),
+      (responsiveBloc.size.width * 0.15).clamp(305, 350),
       responsiveBloc.size.height,
     );
 
@@ -40,16 +40,16 @@ class MainOptionMenuWidget extends StatelessWidget {
           color: Theme.of(context).splashColor,
           child: ListView(
             children: <Widget>[
-              DrawerHeader(
-                child: Center(
-                  child: Image.asset(drawerMainMenuBloc.mainCover),
-                ),
+              const DrawerHeader(
+                child: MenuHeader(),
               ),
               ...drawerMainMenuBloc.listMenuOptions.map((DrawerOptionWidget e) {
                 return DrawerOptionWidget(
                   onPressed: e.onPressed,
                   title: e.title,
+                  secondaryOption: e.secondaryOption,
                   icondata: e.icondata,
+                  isExpanded: e.isExpanded,
                   getOutOnTap: false,
                 );
               }),
