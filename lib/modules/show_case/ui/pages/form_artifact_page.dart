@@ -1,16 +1,16 @@
-import 'package:aleteo_arquetipo/modules/show_case/blocs/create_artifact_bloc.dart';
-import 'package:aleteo_arquetipo/modules/show_case/models/artifact_model.dart';
-import 'package:aleteo_arquetipo/modules/show_case/ui/widgets/button.dart';
-import 'package:aleteo_arquetipo/ui/widgets/responsive/my_app_scaffold_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app_config.dart';
 import '../../../../blocs/navigator_bloc.dart';
 import '../../../../ui/widgets/forms/custom_autocomplete_input_widget.dart';
+import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
+import '../../blocs/create_artifact_bloc.dart';
+import '../../models/artifact_model.dart';
+import '../widgets/button.dart';
 import 'form_codes_page.dart';
 
 class FormArtifact extends StatelessWidget {
-  const FormArtifact({super.key, required this.createArtifactBloc});
+  const FormArtifact({required this.createArtifactBloc, super.key});
 
   final CreateArtifactBloc createArtifactBloc;
 
@@ -19,29 +19,26 @@ class FormArtifact extends StatelessWidget {
     createArtifactBloc.clearShowCaseModel();
     String image = '';
     return MyAppScaffold(
-      withAppbar: true,
-      withMargin: true,
       child: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
           children: [
             CustomAutoCompleteInputWidget(
               label: 'Title',
-              onEditingValueFunction: (val) {
+              onEditingValueFunction: (String val) {
                 createArtifactBloc.title = val;
               },
-              onEditingValidateFunction: (val) {
+              onEditingValidateFunction: (String val) {
                 String? messageError =
                     createArtifactBloc.validateForm('String', val, true);
                 return messageError;
               },
-              textInputType: TextInputType.text,
             ),
             CustomAutoCompleteInputWidget(
               label: 'Width',
-              onEditingValueFunction: (val) {
+              onEditingValueFunction: (String val) {
               },
-              onEditingValidateFunction: (val) {
+              onEditingValidateFunction: (String val) {
                 String? messageError =
                     createArtifactBloc.validateForm('number', val, true);
                 return messageError;
@@ -50,9 +47,9 @@ class FormArtifact extends StatelessWidget {
             ),
             CustomAutoCompleteInputWidget(
               label: 'Height',
-              onEditingValueFunction: (val) {
+              onEditingValueFunction: (String val) {
               },
-              onEditingValidateFunction: (val) {
+              onEditingValidateFunction: (String val) {
                 String? messageError =
                     createArtifactBloc.validateForm('number', val, true);
                 return messageError;
@@ -61,9 +58,9 @@ class FormArtifact extends StatelessWidget {
             ),
             CustomAutoCompleteInputWidget(
               label: 'Radius',
-              onEditingValueFunction: (val) {
+              onEditingValueFunction: (String val) {
               },
-              onEditingValidateFunction: (val) {
+              onEditingValidateFunction: (String val) {
                 String? messageError =
                     createArtifactBloc.validateForm('number', val, true);
                 return messageError;
@@ -72,15 +69,14 @@ class FormArtifact extends StatelessWidget {
             ),
             CustomAutoCompleteInputWidget(
               label: 'Image',
-              onEditingValueFunction: (val) {
+              onEditingValueFunction: (String val) {
                 image = val;
               },
-              onEditingValidateFunction: (val) {
+              onEditingValidateFunction: (String val) {
                 String? messageError =
                     createArtifactBloc.validateForm('number', val, true);
                 return messageError;
               },
-              textInputType: TextInputType.text,
             ),
             const Expanded(
               child: SizedBox(),
@@ -88,7 +84,7 @@ class FormArtifact extends StatelessWidget {
             Button(
               title: 'Siguiente',
               onPressed: () {
-                ArtifactModel artifactModel = ArtifactModel(
+                final ArtifactModel artifactModel = ArtifactModel(
                   type: createArtifactBloc.title,
                   image: image,
                   anatomyImage: '',

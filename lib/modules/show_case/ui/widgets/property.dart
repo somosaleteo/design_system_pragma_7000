@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Property extends StatelessWidget {
-  const Property({super.key, required this.text});
+  const Property({required this.text, super.key});
   final String text;
   @override
   Widget build(BuildContext context) {

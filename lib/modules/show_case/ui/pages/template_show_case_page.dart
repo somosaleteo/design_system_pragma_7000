@@ -1,18 +1,17 @@
-import 'package:aleteo_arquetipo/modules/show_case/blocs/template_show_case_model_bloc.dart';
-import 'package:aleteo_arquetipo/modules/show_case/models/code_artifact_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
 import '../../blocs/show_case_bloc.dart';
+import '../../blocs/template_show_case_model_bloc.dart';
+import '../../models/code_artifact_model.dart';
 import '../../models/show_case_model.dart';
 import '../../models/variant_artifact_model.dart';
 import '../widgets/code_list.dart';
 
 class TemplateShowCase extends StatelessWidget {
   const TemplateShowCase({
-    super.key,
-    required this.showCaseBloc,
-    required this.templateShowCaseBloc,
+    required this.showCaseBloc, required this.templateShowCaseBloc, super.key,
   });
   final ShowCaseBloc showCaseBloc;
   final TemplateShowCaseBloc templateShowCaseBloc;
@@ -21,9 +20,9 @@ class TemplateShowCase extends StatelessWidget {
   Widget build(BuildContext context) {
     final ShowCaseModel showCaseModel = showCaseBloc.showCaseModelActive;
     final Color color = Theme.of(context).colorScheme.onPrimaryContainer;
-    final urlImageDrive =
+    final String? urlImageDrive =
         showCaseBloc.parseUrlValidFromDrive(showCaseModel.artifact.image);
-    const imageDefault =
+    const String imageDefault =
         'https://cdn-icons-png.flaticon.com/256/3342/3342137.png';
     final String title = showCaseModel.artifact.type;
     final TextStyle textStyleParagraphs = TextStyle(
@@ -39,14 +38,13 @@ class TemplateShowCase extends StatelessWidget {
     return MyAppScaffold(
       child: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(height: 10.0),
             Text(
               title != '' ? title[0].toUpperCase() + title.substring(1) : '',
               style: TextStyle(
-                  fontSize: 46, color: color, fontWeight: FontWeight.w700),
+                  fontSize: 46, color: color, fontWeight: FontWeight.w700,),
             ),
             Text(
               showCaseModel.artifact.description,
@@ -97,7 +95,7 @@ class TemplateShowCase extends StatelessWidget {
                       Text(
                         'Recomendación',
                         style: textStyleParagraphs.copyWith(
-                            fontWeight: FontWeight.w700),
+                            fontWeight: FontWeight.w700,),
                       ),
                       Text(
                         showCaseModel.useArtifactModel.recomendationDescription,
@@ -112,7 +110,7 @@ class TemplateShowCase extends StatelessWidget {
                       Text(
                         'Evitar',
                         style: textStyleParagraphs.copyWith(
-                            fontWeight: FontWeight.w700),
+                            fontWeight: FontWeight.w700,),
                       ),
                       Text(
                         showCaseModel.useArtifactModel.avoidDescription,
@@ -205,9 +203,7 @@ class TemplateShowCase extends StatelessWidget {
 
 class CardUseWidget extends StatelessWidget {
   const CardUseWidget({
-    super.key,
-    required this.image,
-    required this.type,
+    required this.image, required this.type, super.key,
   });
 
   final String image;
@@ -218,7 +214,6 @@ class CardUseWidget extends StatelessWidget {
     return Stack(
       children: [
         Align(
-          alignment: Alignment.center,
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.transparent,
@@ -254,11 +249,7 @@ class CardUseWidget extends StatelessWidget {
 
 class CodeWidget extends StatelessWidget {
   const CodeWidget({
-    super.key,
-    required this.templateShowCaseBloc,
-    required this.imageDefault,
-    required this.showCaseBloc,
-    required this.codes,
+    required this.templateShowCaseBloc, required this.imageDefault, required this.showCaseBloc, required this.codes, super.key,
     this.image,
   });
 
@@ -328,6 +319,6 @@ class CodeWidget extends StatelessWidget {
                 )
             ],
           );
-        });
+        },);
   }
 }

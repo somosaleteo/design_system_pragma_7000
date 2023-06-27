@@ -5,23 +5,22 @@ import '../utils/methods_enum.dart';
 import 'navigator_bloc.dart';
 
 class BlocHttp extends BlocModule {
+  BlocHttp({
+    required this.navigatorBloc,
+  }) {
+    accessToken = '';
+  }
   static String name = 'blocHttp';
 
   final NavigatorBloc navigatorBloc;
 
   late String accessToken;
 
-  BlocHttp({
-    required this.navigatorBloc,
-  }) {
-    accessToken = '';
-  }
-
   Future<Map<String, dynamic>> create({
- required String url,
- required Map<String, dynamic> body,
+    required String url,
+    required Map<String, dynamic> body,
   }) async {
-    final httpService = HttpProvider(
+    final HttpProvider httpService = HttpProvider(
       method: Methods.post,
       url: url,
       data: body,
@@ -37,12 +36,12 @@ class BlocHttp extends BlocModule {
   Future<Map<String, dynamic>> read({
     required String url,
   }) async {
-    final httpService = HttpProvider(
+    final HttpProvider httpService = HttpProvider(
       method: Methods.get,
       url: url,
       navigatorBloc: navigatorBloc,
     );
-    final response = await httpService.launchUrl();
+    final Map<String, dynamic> response = await httpService.launchUrl();
     return response;
   }
 
@@ -50,9 +49,9 @@ class BlocHttp extends BlocModule {
   delete() {}
 
   bool hasDataError(Map<String, dynamic> data) {
-    final isMap =
+    final bool isMap =
         data['data'].runtimeType.toString() == '_Map<String, dynamic>';
-    return isMap && data['data'].containsKey('error');
+    return isMap && data['data'].containsKey('error') as bool;
   }
 
   @override

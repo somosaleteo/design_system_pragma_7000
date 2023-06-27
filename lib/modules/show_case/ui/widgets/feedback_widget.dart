@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 class FeedbackWidget extends StatelessWidget {
   const FeedbackWidget({
-    super.key,
-    required this.mainColor,
+    required this.mainColor, super.key,
   });
 
   final Color mainColor;
@@ -33,7 +32,7 @@ class FeedbackWidget extends StatelessWidget {
               TextSpan(
                   text:
                       'El design system es de todos y eres parte de la solución,',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+                  style: TextStyle(fontWeight: FontWeight.bold),),
               TextSpan(
                 text:
                     ' si identificas una oportunidad de mejora o un componente que no está en la librería siéntete libre de proponerlo.',
@@ -56,7 +55,7 @@ class FeedbackWidget extends StatelessWidget {
               ),
             ),
             foregroundColor: MaterialStateProperty.all<Color>(
-                Theme.of(context).colorScheme.primary),
+                Theme.of(context).colorScheme.primary,),
           ),
           onPressed: () {},
           child: const Text(
@@ -78,7 +77,7 @@ class FeedbackWidget extends StatelessWidget {
             children: const [
               TextSpan(
                   text:
-                      'Puedes contactar el equipo del Design System a través del correo si necesitas ayuda '),
+                      'Puedes contactar el equipo del Design System a través del correo si necesitas ayuda ',),
               TextSpan(
                 text: 'design.system@pragma.com.co',
                 style: TextStyle(decoration: TextDecoration.underline),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../../../app_config.dart';
-import '../../../../blocs/theme_bloc.dart';
 import '../../../../blocs/navigator_bloc.dart';
+import '../../../../blocs/theme_bloc.dart';
 import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
 import '../../blocs/create_artifact_bloc.dart';
 import '../../blocs/show_case_bloc.dart';
@@ -11,12 +12,7 @@ import 'form_artifact_page.dart';
 
 class ShowCaseHomePage extends StatelessWidget {
   const ShowCaseHomePage({
-    super.key,
-    required this.showCaseBloc,
-    required this.createArtifactBloc,
-    required this.templateShowCaseBloc,
-    required this.navigatorBloc,
-    required this.themeBloc,
+    required this.showCaseBloc, required this.createArtifactBloc, required this.templateShowCaseBloc, required this.navigatorBloc, required this.themeBloc, super.key,
   });
 
   final ShowCaseBloc showCaseBloc;
@@ -28,7 +24,6 @@ class ShowCaseHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     showCaseBloc.getShowCaseData();
     return MyAppScaffold(
-      withAppbar: true,
       child: Column(
         children: [
           Align(

@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'package:aleteo_arquetipo/modules/show_case/blocs/create_artifact_bloc.dart';
-import 'package:aleteo_arquetipo/modules/show_case/blocs/template_show_case_model_bloc.dart';
-import 'package:aleteo_arquetipo/modules/show_case/ui/pages/template_show_case_page.dart';
+
 import 'package:flutter/material.dart';
 
 import 'blocs/bloc_drawer.dart';
@@ -13,10 +11,13 @@ import 'blocs/navigator_bloc.dart';
 import 'blocs/onboarding_bloc.dart';
 import 'blocs/theme_bloc.dart';
 import 'entities/entity_bloc.dart';
-import 'modules/show_case/blocs/show_case_bloc.dart';
 import 'modules/demo/blocs/bloc_demo.dart';
 import 'modules/demo/ui/pages/demo_home_page.dart';
+import 'modules/show_case/blocs/create_artifact_bloc.dart';
+import 'modules/show_case/blocs/show_case_bloc.dart';
+import 'modules/show_case/blocs/template_show_case_model_bloc.dart';
 import 'modules/show_case/ui/pages/show_case_home_page.dart';
+import 'modules/show_case/ui/pages/template_show_case_page.dart';
 import 'providers/my_app_navigator_provider.dart';
 import 'services/theme_config.dart';
 import 'services/theme_service.dart';
@@ -54,12 +55,17 @@ FutureOr<void> demoInsert(BlocCore<dynamic> blocCoreInt) async {
 }
 
 FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
-  ShowCaseBloc showCaseBloc = blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name);
-  TemplateShowCaseBloc templateShowCaseBloc = blocCoreInt.getBlocModule<TemplateShowCaseBloc>(TemplateShowCaseBloc.name);
-  CreateArtifactBloc createArtifactBloc = blocCoreInt.getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name);
-  NavigatorBloc navigatorBloc = blocCoreInt.getBlocModule<NavigatorBloc>(NavigatorBloc.name);
-  ThemeBloc themeBloc = blocCoreInt.getBlocModule<ThemeBloc>(ThemeBloc.name);
-  
+  final ShowCaseBloc showCaseBloc =
+      blocCoreInt.getBlocModule<ShowCaseBloc>(ShowCaseBloc.name);
+  final TemplateShowCaseBloc templateShowCaseBloc = blocCoreInt
+      .getBlocModule<TemplateShowCaseBloc>(TemplateShowCaseBloc.name);
+  final CreateArtifactBloc createArtifactBloc =
+      blocCoreInt.getBlocModule<CreateArtifactBloc>(CreateArtifactBloc.name);
+  final NavigatorBloc navigatorBloc =
+      blocCoreInt.getBlocModule<NavigatorBloc>(NavigatorBloc.name);
+  final ThemeBloc themeBloc =
+      blocCoreInt.getBlocModule<ThemeBloc>(ThemeBloc.name);
+
   final ShowCaseHomePage showCaseHomePage = ShowCaseHomePage(
     navigatorBloc: navigatorBloc,
     createArtifactBloc: createArtifactBloc,
@@ -74,7 +80,7 @@ FutureOr<void> showCaseBlocInsert(BlocCore<dynamic> blocCoreInt) async {
   );
   navigatorBloc.setHomePageAndUpdate(showCaseHomePage);
   navigatorBloc.setTitle('Show Case Home');
-  Map<String, Widget> availablePages = {
+  final Map<String, Widget> availablePages = <String, Widget>{
     ShowCaseBloc.name: showCaseHomePage,
     TemplateShowCaseBloc.name: templateShowCasePage
   };
@@ -105,16 +111,22 @@ Future<void> onboarding({
     blocCore.addBlocModule<BlocHttp>(
       BlocHttp.name,
       BlocHttp(
-        navigatorBloc: blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
+        navigatorBloc:
+            blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
       ),
     );
     blocCoreInt.addBlocModule(
       ShowCaseBloc.name,
       ShowCaseBloc(
         blocHttp: blocCore.getBlocModule<BlocHttp>(BlocHttp.name),
-        drawerMainMenuBloc: blocCoreInt.getBlocModule<DrawerMainMenuBloc>(DrawerMainMenuBloc.name),
-        drawerSecondaryMenuBloc: blocCoreInt.getBlocModule<DrawerSecondaryMenuBloc>(DrawerSecondaryMenuBloc.name),
-        navigatorBloc: blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
+        drawerMainMenuBloc: blocCoreInt
+            .getBlocModule<DrawerMainMenuBloc>(DrawerMainMenuBloc.name),
+        drawerSecondaryMenuBloc:
+            blocCoreInt.getBlocModule<DrawerSecondaryMenuBloc>(
+          DrawerSecondaryMenuBloc.name,
+        ),
+        navigatorBloc:
+            blocCore.getBlocModule<NavigatorBloc>(NavigatorBloc.name),
       ),
     );
 
@@ -129,15 +141,16 @@ Future<void> onboarding({
       ),
     );
     blocCoreInt.addBlocModule(
-        OnboardingBloc.name,
-        OnboardingBloc(
-          <FutureOr<void> Function()>[
-            testMe,
-            () async {
-              await showCaseBlocInsert(blocCoreInt);
-            }
-          ],
-        ));
+      OnboardingBloc.name,
+      OnboardingBloc(
+        <FutureOr<void> Function()>[
+          testMe,
+          () async {
+            await showCaseBlocInsert(blocCoreInt);
+          }
+        ],
+      ),
+    );
 // redirigimos al onboarding
     blocCoreInt
         .getBlocModule<NavigatorBloc>(NavigatorBloc.name)

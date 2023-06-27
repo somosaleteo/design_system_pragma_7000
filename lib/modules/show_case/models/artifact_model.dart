@@ -1,4 +1,4 @@
-import 'package:aleteo_arquetipo/entities/entity_model.dart';
+import '../../../entities/entity_model.dart';
 
 class ArtifactModel extends EntityModel {
   const ArtifactModel({
@@ -7,11 +7,6 @@ class ArtifactModel extends EntityModel {
     required this.description,
     required this.anatomyImage,
   });
-
-  final String type;
-  final String image;
-  final String description;
-  final String anatomyImage;
 
   factory ArtifactModel.empty() {
     return const ArtifactModel(
@@ -22,12 +17,18 @@ class ArtifactModel extends EntityModel {
     );
   }
 
+  final String type;
+  final String image;
+  final String description;
+  final String anatomyImage;
+
   @override
-  EntityModel copyWith(
-      {String? typeTmp,
-      String? anatomyImageTpm,
-      String? descriptionTpm,
-      String? imageTmp}) {
+  EntityModel copyWith({
+    String? typeTmp,
+    String? anatomyImageTpm,
+    String? descriptionTpm,
+    String? imageTmp,
+  }) {
     return ArtifactModel(
       type: typeTmp ?? type,
       image: imageTmp ?? image,
@@ -55,12 +56,12 @@ class ArtifactModel extends EntityModel {
   @override
   int get hashCode => '$type$image$anatomyImage$description'.hashCode;
 
-  static fromJson(Map<String, dynamic> json) {
+  static ArtifactModel fromJson(Map<String, dynamic> json) {
     return ArtifactModel(
-      type: json['type'] ?? '',
-      image: json['image'] ?? '',
-      anatomyImage: json['anatomyImage'] ?? '',
-      description: json['description'] ?? '',
+      type: (json['type'] ?? '') as String,
+      image: (json['image'] ?? '') as String,
+      anatomyImage: (json['anatomyImage'] ?? '') as String,
+      description: (json['description'] ?? '') as String,
     );
   }
 }

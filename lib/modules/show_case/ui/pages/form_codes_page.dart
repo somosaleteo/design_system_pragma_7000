@@ -1,16 +1,16 @@
-import 'package:aleteo_arquetipo/modules/show_case/models/code_artifact_model.dart';
-import 'package:aleteo_arquetipo/modules/show_case/ui/pages/form_properties_page.dart';
-import 'package:aleteo_arquetipo/modules/show_case/ui/widgets/button.dart';
-import 'package:aleteo_arquetipo/ui/widgets/responsive/my_app_scaffold_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app_config.dart';
 import '../../../../blocs/navigator_bloc.dart';
 import '../../../../ui/widgets/forms/custom_autocomplete_input_widget.dart';
+import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
 import '../../blocs/create_artifact_bloc.dart';
+import '../../models/code_artifact_model.dart';
+import '../widgets/button.dart';
+import 'form_properties_page.dart';
 
 class FormCodeArtifact extends StatelessWidget {
-  const FormCodeArtifact({super.key, required this.createArtifactBloc});
+  const FormCodeArtifact({required this.createArtifactBloc, super.key});
   final CreateArtifactBloc createArtifactBloc;
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,6 @@ class FormCodeArtifact extends StatelessWidget {
     String instructions = '';
     bool existsLanguage = false;
     return MyAppScaffold(
-      withAppbar: true,
-      withMargin: true,
       child: Padding(
         padding: const EdgeInsets.all(30.0),
         child: SingleChildScrollView(
@@ -29,41 +27,38 @@ class FormCodeArtifact extends StatelessWidget {
               CustomAutoCompleteInputWidget(
                 controller: createArtifactBloc.languageController,
                 label: 'Language',
-                onEditingValueFunction: (val) {
+                onEditingValueFunction: (String val) {
                   language = val;
                 },
-                onEditingValidateFunction: (val) {
+                onEditingValidateFunction: (String val) {
                   String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
-                textInputType: TextInputType.text,
               ),
               CustomAutoCompleteInputWidget(
                 controller: createArtifactBloc.codeController,
                 label: 'Code',
-                onEditingValueFunction: (val) {
+                onEditingValueFunction: (String val) {
                   code = val;
                 },
-                onEditingValidateFunction: (val) {
+                onEditingValidateFunction: (String val) {
                   String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
-                textInputType: TextInputType.text,
               ),
               CustomAutoCompleteInputWidget(
                 controller: createArtifactBloc.intructionController,
                 label: 'Instruction',
-                onEditingValueFunction: (val) {
+                onEditingValueFunction: (String val) {
                   instructions = val;
                 },
-                onEditingValidateFunction: (val) {
+                onEditingValidateFunction: (String val) {
                   String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
-                textInputType: TextInputType.text,
               ),
               Button(
                 title: 'Agregar',
@@ -71,7 +66,7 @@ class FormCodeArtifact extends StatelessWidget {
                   existsLanguage = createArtifactBloc.existsLanguage(language);
         
                   if (!existsLanguage) {
-                    CodeArtifactModel codeArtifactModel = CodeArtifactModel(
+                    final CodeArtifactModel codeArtifactModel = CodeArtifactModel(
                       type: createArtifactBloc.title,
                       language: language,
                       code: code,
@@ -86,7 +81,7 @@ class FormCodeArtifact extends StatelessWidget {
                   stream: createArtifactBloc.languageExistsStream,
                   builder: (BuildContext context, AsyncSnapshot data) {
                     return Text(createArtifactBloc.languageExists);
-                  }),
+                  },),
               const Divider(),
               const Text('Códigos agregados'),
               StreamBuilder(
@@ -104,7 +99,7 @@ class FormCodeArtifact extends StatelessWidget {
                         );
                       },
                     );
-                  }),
+                  },),
               Button(
                 title: 'Siguiente',
                 onPressed: () {

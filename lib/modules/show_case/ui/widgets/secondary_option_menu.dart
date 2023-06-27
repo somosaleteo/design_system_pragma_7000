@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 class SecondaryOptionMenu extends StatelessWidget {
   const SecondaryOptionMenu({
-    super.key,
-    required this.text,
+    required this.text, super.key,
     this.focusNode,
     this.isAutoFocus,
     this.onTap,

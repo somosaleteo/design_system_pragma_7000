@@ -1,5 +1,5 @@
-import 'package:aleteo_arquetipo/entities/entity_model.dart';
-import 'package:aleteo_arquetipo/modules/show_case/models/code_artifact_model.dart';
+import '../../../entities/entity_model.dart';
+import 'code_artifact_model.dart';
 
 class VariantArtifactModel extends EntityModel {
   const VariantArtifactModel({
@@ -10,12 +10,6 @@ class VariantArtifactModel extends EntityModel {
     required this.codes,
   });
 
-  final String type;
-  final String name;
-  final String description;
-  final String image;
-  final List<CodeArtifactModel> codes;
-
   factory VariantArtifactModel.empty() {
     return const VariantArtifactModel(
       type: '',
@@ -25,6 +19,12 @@ class VariantArtifactModel extends EntityModel {
       name: '',
     );
   }
+
+  final String type;
+  final String name;
+  final String description;
+  final String image;
+  final List<CodeArtifactModel> codes;
 
   @override
   EntityModel copyWith({
@@ -64,13 +64,13 @@ class VariantArtifactModel extends EntityModel {
   @override
   int get hashCode => '$type$description$name$codes$image'.hashCode;
 
-  static fromJson(Map<String, dynamic> json) {
+  static VariantArtifactModel fromJson(Map<String, dynamic> json) {
     return VariantArtifactModel(
-      type: json['type'] ?? '',
-      name: json['name'] ?? '',
-      description: json['description'] ?? '',
-      image: json['image'] ?? '',
-      codes: json['codes'] as List<CodeArtifactModel> ,
+      type: (json['type'] ?? '') as String,
+      name: (json['name'] ?? '') as String,
+      description: (json['description'] ?? '') as String,
+      image: (json['image'] ?? '') as String,
+      codes: json['codes'] as List<CodeArtifactModel>,
     );
   }
 }

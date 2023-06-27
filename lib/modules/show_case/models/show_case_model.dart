@@ -1,9 +1,8 @@
-import 'package:aleteo_arquetipo/modules/show_case/models/use_artifact_model.dart';
-import 'package:aleteo_arquetipo/modules/show_case/models/variant_artifact_model.dart';
-
 import 'artifact_model.dart';
 import 'code_artifact_model.dart';
 import 'properties_artifact_model.dart';
+import 'use_artifact_model.dart';
+import 'variant_artifact_model.dart';
 
 class ShowCaseModel {
   const ShowCaseModel({
@@ -13,11 +12,6 @@ class ShowCaseModel {
     required this.useArtifactModel,
     required this.varianstArtifactModel,
   });
-  final ArtifactModel artifact;
-  final List<CodeArtifactModel> codeArtifact;
-  final UseArtifactModel useArtifactModel;
-  final List<VariantArtifactModel> varianstArtifactModel;
-  final List<PropertiesArtifactModel> propertiesArtifact;
 
   factory ShowCaseModel.empty() {
     return ShowCaseModel(
@@ -28,4 +22,9 @@ class ShowCaseModel {
       varianstArtifactModel: [],
     );
   }
+  final ArtifactModel artifact;
+  final List<CodeArtifactModel> codeArtifact;
+  final UseArtifactModel useArtifactModel;
+  final List<VariantArtifactModel> varianstArtifactModel;
+  final List<PropertiesArtifactModel> propertiesArtifact;
 }

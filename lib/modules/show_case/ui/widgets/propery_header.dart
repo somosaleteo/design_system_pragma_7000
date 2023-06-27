@@ -9,9 +9,9 @@ class PropertyHeader extends StatelessWidget {
       color: Colors.grey[300],
       child: const Row(
         children: [
-          Property(text: "Name"),
-          Property(text: "Description"),
-          Property(text: "Default"),
+          Property(text: 'Name'),
+          Property(text: 'Description'),
+          Property(text: 'Default'),
         ],
       ),
     );
