@@ -23,7 +23,7 @@ class FormCodeArtifact extends StatelessWidget {
         padding: const EdgeInsets.all(30.0),
         child: SingleChildScrollView(
           child: Column(
-            children: [
+            children: <Widget>[
               CustomAutoCompleteInputWidget(
                 controller: createArtifactBloc.languageController,
                 label: 'Language',
@@ -31,7 +31,7 @@ class FormCodeArtifact extends StatelessWidget {
                   language = val;
                 },
                 onEditingValidateFunction: (String val) {
-                  String? messageError =
+                  final String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
@@ -43,7 +43,7 @@ class FormCodeArtifact extends StatelessWidget {
                   code = val;
                 },
                 onEditingValidateFunction: (String val) {
-                  String? messageError =
+                  final String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
@@ -55,7 +55,7 @@ class FormCodeArtifact extends StatelessWidget {
                   instructions = val;
                 },
                 onEditingValidateFunction: (String val) {
-                  String? messageError =
+                  final String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
@@ -64,42 +64,46 @@ class FormCodeArtifact extends StatelessWidget {
                 title: 'Agregar',
                 onPressed: () {
                   existsLanguage = createArtifactBloc.existsLanguage(language);
-        
+
                   if (!existsLanguage) {
-                    final CodeArtifactModel codeArtifactModel = CodeArtifactModel(
+                    final CodeArtifactModel codeArtifactModel =
+                        CodeArtifactModel(
                       type: createArtifactBloc.title,
                       language: language,
                       code: code,
-                      instructions: instructions, variant: '',
+                      instructions: instructions,
+                      variant: '',
                     );
                     createArtifactBloc.addCode(codeArtifactModel);
                     createArtifactBloc.clearInputsCodeForm();
                   }
                 },
               ),
-              StreamBuilder(
-                  stream: createArtifactBloc.languageExistsStream,
-                  builder: (BuildContext context, AsyncSnapshot data) {
-                    return Text(createArtifactBloc.languageExists);
-                  },),
+              StreamBuilder<String>(
+                stream: createArtifactBloc.languageExistsStream,
+                builder: (BuildContext context, AsyncSnapshot<dynamic> data) {
+                  return Text(createArtifactBloc.languageExists);
+                },
+              ),
               const Divider(),
               const Text('Códigos agregados'),
-              StreamBuilder(
-                  stream: createArtifactBloc.listCodeArtifactModelStream,
-                  builder: (BuildContext context, AsyncSnapshot data) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: createArtifactBloc.listCodeArtifactModel.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text(
-                            createArtifactBloc
-                                .listCodeArtifactModel[index].language,
-                          ),
-                        );
-                      },
-                    );
-                  },),
+              StreamBuilder<List<CodeArtifactModel>>(
+                stream: createArtifactBloc.listCodeArtifactModelStream,
+                builder: (BuildContext context, AsyncSnapshot<dynamic> data) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: createArtifactBloc.listCodeArtifactModel.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: Text(
+                          createArtifactBloc
+                              .listCodeArtifactModel[index].language,
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
               Button(
                 title: 'Siguiente',
                 onPressed: () {

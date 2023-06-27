@@ -184,7 +184,7 @@ class ShowCaseBloc extends BlocModule {
 
   String? parseUrlValidFromDrive(String googleDriveUrl) {
     final RegExp regExp = RegExp(r'\/d\/([a-zA-Z0-9_-]+)');
-    final Match match = regExp.firstMatch(googleDriveUrl) as Match;
+    final Match match = regExp.firstMatch(googleDriveUrl)!;
 
     if (match.groupCount >= 1) {
       final String fileId = match.group(1) ?? '';
@@ -218,8 +218,8 @@ class ShowCaseBloc extends BlocModule {
       final properties = showcase['properties'];
 
       codeArtifact = <CodeArtifactModel>[];
-      propertiesArtifact = [];
-      variantsArtifactModel = [];
+      propertiesArtifact = <PropertiesArtifactModel>[];
+      variantsArtifactModel = <VariantArtifactModel>[];
       artifactModel = ArtifactModel.fromJson(artifact as Map<String, dynamic>);
       useArtifactModel = UseArtifactModel.fromJson(use as Map<String, dynamic>);
 

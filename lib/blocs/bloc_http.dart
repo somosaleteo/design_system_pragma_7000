@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import '../entities/entity_bloc.dart';
 import '../providers/http_provider.dart';
 import '../utils/methods_enum.dart';

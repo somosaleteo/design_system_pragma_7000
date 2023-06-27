@@ -11,7 +11,9 @@ import '../widgets/code_list.dart';
 
 class TemplateShowCase extends StatelessWidget {
   const TemplateShowCase({
-    required this.showCaseBloc, required this.templateShowCaseBloc, super.key,
+    required this.showCaseBloc,
+    required this.templateShowCaseBloc,
+    super.key,
   });
   final ShowCaseBloc showCaseBloc;
   final TemplateShowCaseBloc templateShowCaseBloc;
@@ -44,7 +46,10 @@ class TemplateShowCase extends StatelessWidget {
             Text(
               title != '' ? title[0].toUpperCase() + title.substring(1) : '',
               style: TextStyle(
-                  fontSize: 46, color: color, fontWeight: FontWeight.w700,),
+                fontSize: 46,
+                color: color,
+                fontWeight: FontWeight.w700,
+              ),
             ),
             Text(
               showCaseModel.artifact.description,
@@ -72,7 +77,7 @@ class TemplateShowCase extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
+              children: <Widget>[
                 Expanded(
                   child: CardUseWidget(
                     type: 'recomendation',
@@ -88,14 +93,15 @@ class TemplateShowCase extends StatelessWidget {
               ],
             ),
             Row(
-              children: [
+              children: <Widget>[
                 Expanded(
                   child: Column(
-                    children: [
+                    children: <Widget>[
                       Text(
                         'Recomendación',
                         style: textStyleParagraphs.copyWith(
-                            fontWeight: FontWeight.w700,),
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                       Text(
                         showCaseModel.useArtifactModel.recomendationDescription,
@@ -106,11 +112,12 @@ class TemplateShowCase extends StatelessWidget {
                 ),
                 Expanded(
                   child: Column(
-                    children: [
+                    children: <Widget>[
                       Text(
                         'Evitar',
                         style: textStyleParagraphs.copyWith(
-                            fontWeight: FontWeight.w700,),
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                       Text(
                         showCaseModel.useArtifactModel.avoidDescription,
@@ -160,14 +167,14 @@ class TemplateShowCase extends StatelessWidget {
                   final VariantArtifactModel variantArtifactModel =
                       showCaseModel.varianstArtifactModel[index];
                   return Column(
-                    children: [
+                    children: <Widget>[
                       Text.rich(
                         TextSpan(
                           text: '${variantArtifactModel.name} ',
                           style: textStyleParagraphs.copyWith(
                             fontWeight: FontWeight.w700,
                           ),
-                          children: [
+                          children: <InlineSpan>[
                             TextSpan(
                               text: variantArtifactModel.description,
                               style: textStyleParagraphs,
@@ -203,7 +210,9 @@ class TemplateShowCase extends StatelessWidget {
 
 class CardUseWidget extends StatelessWidget {
   const CardUseWidget({
-    required this.image, required this.type, super.key,
+    required this.image,
+    required this.type,
+    super.key,
   });
 
   final String image;
@@ -212,14 +221,15 @@ class CardUseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [
+      children: <Widget>[
         Align(
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.transparent,
               borderRadius: const BorderRadius.all(Radius.circular(20.0)),
               border: Border.all(
-                color: type == 'recomendation' ? Colors.green[400]! : Colors.red,
+                color:
+                    type == 'recomendation' ? Colors.green[400]! : Colors.red,
               ),
             ),
             child: const SizedBox(
@@ -236,7 +246,8 @@ class CardUseWidget extends StatelessWidget {
         Align(
           alignment: Alignment.topCenter,
           child: CircleAvatar(
-            backgroundColor: type == 'recomendation' ? Colors.green[400]! : Colors.red,
+            backgroundColor:
+                type == 'recomendation' ? Colors.green[400]! : Colors.red,
             child: Icon(
               type == 'recomendation' ? Icons.check_sharp : Icons.clear,
             ),
@@ -249,7 +260,11 @@ class CardUseWidget extends StatelessWidget {
 
 class CodeWidget extends StatelessWidget {
   const CodeWidget({
-    required this.templateShowCaseBloc, required this.imageDefault, required this.showCaseBloc, required this.codes, super.key,
+    required this.templateShowCaseBloc,
+    required this.imageDefault,
+    required this.showCaseBloc,
+    required this.codes,
+    super.key,
     this.image,
   });
 
@@ -261,64 +276,65 @@ class CodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: templateShowCaseBloc.showCodeArtifactStream,
-        builder: (BuildContext context, AsyncSnapshot data) {
-          final bool showCode = templateShowCaseBloc.showCodeArtifact;
-          return Column(
-            children: [
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: !showCode
-                      ? const BorderRadius.all(
-                          Radius.circular(25),
-                        )
-                      : const BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                        ),
-                ),
-                child: SizedBox(
-                  height: 250,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: CachedNetworkImage(
-                          width: 100,
-                          height: 100,
-                          imageUrl: image ?? imageDefault,
-                        ),
+    return StreamBuilder<bool>(
+      stream: templateShowCaseBloc.showCodeArtifactStream,
+      builder: (BuildContext context, AsyncSnapshot<dynamic> data) {
+        final bool showCode = templateShowCaseBloc.showCodeArtifact;
+        return Column(
+          children: <Widget>[
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: !showCode
+                    ? const BorderRadius.all(
+                        Radius.circular(25),
+                      )
+                    : const BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25),
                       ),
-                      const Divider(),
-                      InkWell(
-                        onTap: () {
-                          templateShowCaseBloc.switchShowCodeArtifact();
-                        },
-                        child: const SizedBox(
-                          width: double.infinity,
-                          child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Text(
-                              'Ver código',
-                              textAlign: TextAlign.end,
-                            ),
+              ),
+              child: SizedBox(
+                height: 250,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: CachedNetworkImage(
+                        width: 100,
+                        height: 100,
+                        imageUrl: image ?? imageDefault,
+                      ),
+                    ),
+                    const Divider(),
+                    InkWell(
+                      onTap: () {
+                        templateShowCaseBloc.switchShowCodeArtifact();
+                      },
+                      child: const SizedBox(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: Text(
+                            'Ver código',
+                            textAlign: TextAlign.end,
                           ),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
               ),
-              if (showCode)
-                CodeList(
-                  codes: codes,
-                  showCaseBloc: showCaseBloc,
-                )
-            ],
-          );
-        },);
+            ),
+            if (showCode)
+              CodeList(
+                codes: codes,
+                showCaseBloc: showCaseBloc,
+              )
+          ],
+        );
+      },
+    );
   }
 }

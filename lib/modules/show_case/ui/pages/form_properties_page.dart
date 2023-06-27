@@ -21,11 +21,12 @@ class FormPropertiesArtifact extends StatelessWidget {
         padding: const EdgeInsets.all(30.0),
         child: SingleChildScrollView(
           child: Column(
-            children: [
-              DropdownButtonFormField(
-                items: createArtifactBloc.listCodeArtifactModel.map((CodeArtifactModel e) {
+            children: <Widget>[
+              DropdownButtonFormField<String>(
+                items: createArtifactBloc.listCodeArtifactModel
+                    .map((CodeArtifactModel e) {
                   /// Ahora creamos "e" y contiene cada uno de los items de la lista.
-                  return DropdownMenuItem(
+                  return DropdownMenuItem<String>(
                     value: e.language,
                     child: Text(e.language),
                   );
@@ -38,7 +39,7 @@ class FormPropertiesArtifact extends StatelessWidget {
                   name = val;
                 },
                 onEditingValidateFunction: (String val) {
-                  String? messageError =
+                  final String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
@@ -46,10 +47,10 @@ class FormPropertiesArtifact extends StatelessWidget {
               CustomAutoCompleteInputWidget(
                 label: 'Description',
                 onEditingValueFunction: (String val) {
-                   description = val;
+                  description = val;
                 },
                 onEditingValidateFunction: (String val) {
-                  String? messageError =
+                  final String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
@@ -57,10 +58,10 @@ class FormPropertiesArtifact extends StatelessWidget {
               CustomAutoCompleteInputWidget(
                 label: 'Default Value',
                 onEditingValueFunction: (String val) {
-                   defaultValue = val;
+                  defaultValue = val;
                 },
                 onEditingValidateFunction: (String val) {
-                  String? messageError =
+                  final String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
@@ -76,29 +77,29 @@ class FormPropertiesArtifact extends StatelessWidget {
                     description: description,
                     language: language,
                   );
-                  
+
                   createArtifactBloc.addProperties(propertiesArtifactModel);
                 },
               ),
-              
               const Divider(),
               const Text('Propiedades agregadas'),
-              StreamBuilder(
-                  stream: createArtifactBloc.listPropertiesArtifactModelStream,
-                  builder: (BuildContext context, AsyncSnapshot data) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount:
-                          createArtifactBloc.listPropertiesArtifactModel.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final PropertiesArtifactModel property =
-                            createArtifactBloc.listPropertiesArtifactModel[index];
-                        return ListTile(
-                          title: Text('${property.language} : ${property.name}'),
-                        );
-                      },
-                    );
-                  },),
+              StreamBuilder<List<PropertiesArtifactModel>>(
+                stream: createArtifactBloc.listPropertiesArtifactModelStream,
+                builder: (BuildContext context, AsyncSnapshot<dynamic> data) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount:
+                        createArtifactBloc.listPropertiesArtifactModel.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final PropertiesArtifactModel property =
+                          createArtifactBloc.listPropertiesArtifactModel[index];
+                      return ListTile(
+                        title: Text('${property.language} : ${property.name}'),
+                      );
+                    },
+                  );
+                },
+              ),
               Button(
                 title: 'Guardar',
                 onPressed: () {
