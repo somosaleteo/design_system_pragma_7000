@@ -4,7 +4,7 @@ import '../../blocs/show_case_bloc.dart';
 import '../../models/code_artifact_model.dart';
 
 class CodeList extends StatelessWidget {
-  const CodeList({super.key, required this.codes, required this.showCaseBloc});
+  const CodeList({required this.codes, required this.showCaseBloc, super.key});
   final List<CodeArtifactModel> codes;
   final ShowCaseBloc showCaseBloc;
 
@@ -33,9 +33,9 @@ class CodeList extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     itemCount: codes.length,
-                    itemBuilder: (context, index) {
-                      final codeKey = codes[index].language;
-                      final code = codes[index].code;
+                    itemBuilder: (BuildContext context, int index) {
+                      final String codeKey = codes[index].language;
+                      final String code = codes[index].code;
                       return InkWell(
                         autofocus: true,
                         onTap: () {
@@ -47,7 +47,7 @@ class CodeList extends StatelessWidget {
                             border: showCaseBloc.activeLanguage == codeKey
                                 ? const Border(
                                     bottom: BorderSide(
-                                        color: Colors.white, width: 2))
+                                        color: Colors.white, width: 2,),)
                                 : null,
                           ),
                           child: Padding(
@@ -109,7 +109,7 @@ class CodeList extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 10,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,),
                         ),
                       ],
                     ),
@@ -117,7 +117,7 @@ class CodeList extends StatelessWidget {
                 ),
               ],
             );
-          }),
+          },),
     );
   }
 }

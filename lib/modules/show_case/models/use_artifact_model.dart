@@ -1,4 +1,4 @@
-import 'package:aleteo_arquetipo/entities/entity_model.dart';
+import '../../../entities/entity_model.dart';
 
 class UseArtifactModel extends EntityModel {
   const UseArtifactModel({
@@ -10,13 +10,6 @@ class UseArtifactModel extends EntityModel {
     required this.avoidDescription,
   });
 
-  final String type;
-  final String description;
-  final String recomendationImage;
-  final String recomendationDescription;
-  final String avoidImage;
-  final String avoidDescription;
-
   factory UseArtifactModel.empty() {
     return const UseArtifactModel(
         type: '',
@@ -24,8 +17,15 @@ class UseArtifactModel extends EntityModel {
         recomendationImage: '',
         recomendationDescription: '',
         avoidImage: '',
-        avoidDescription: '');
+        avoidDescription: '',);
   }
+
+  final String type;
+  final String description;
+  final String recomendationImage;
+  final String recomendationDescription;
+  final String avoidImage;
+  final String avoidDescription;
 
   @override
   EntityModel copyWith(
@@ -34,7 +34,7 @@ class UseArtifactModel extends EntityModel {
       String? recomendationImageTmp,
       String? recomendationDescriptionTmp,
       String? avoidImageTmp,
-      String? avoidDescriptionTmp}) {
+      String? avoidDescriptionTmp,}) {
     return UseArtifactModel(
         type: typeTmp ?? type,
         description: descriptionTpm ?? description,
@@ -42,7 +42,7 @@ class UseArtifactModel extends EntityModel {
         recomendationDescription:
             recomendationDescriptionTmp ?? recomendationDescription,
         avoidImage: avoidImageTmp ?? avoidImage,
-        avoidDescription: avoidImageTmp ?? avoidDescription);
+        avoidDescription: avoidImageTmp ?? avoidDescription,);
   }
 
   @override
@@ -69,14 +69,14 @@ class UseArtifactModel extends EntityModel {
       '$type$description$recomendationImage$recomendationDescription$avoidImage$avoidDescription'
           .hashCode;
 
-  static fromJson(Map<String, dynamic> json) {
+  static UseArtifactModel fromJson(Map<String, dynamic> json) {
     return UseArtifactModel(
-      type: json['type'] ?? '',
-      description: json['description'] ?? '',
-      avoidDescription: json['avoidDescription'] ??'',
-      avoidImage: json['avoidImage'] ??'',
-      recomendationDescription:json['recomendationDescription'] ?? '',
-      recomendationImage: json['recomendationImage'] ?? '',
+      type: (json['type'] ?? '') as String,
+      description: (json['description'] ?? '') as String,
+      avoidDescription: (json['avoidDescription'] ??'') as String,
+      avoidImage: (json['avoidImage'] ??'') as String,
+      recomendationDescription:(json['recomendationDescription'] ?? '') as String,
+      recomendationImage: (json['recomendationImage'] ?? '') as String,
     );
   }
 }

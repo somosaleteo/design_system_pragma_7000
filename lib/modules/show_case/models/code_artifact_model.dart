@@ -1,12 +1,6 @@
-import 'package:aleteo_arquetipo/entities/entity_model.dart';
+import '../../../entities/entity_model.dart';
 
 class CodeArtifactModel extends EntityModel {
-  final String type;
-  final String language;
-  final String code;
-  final String instructions;
-  final String variant;
-
   const CodeArtifactModel({
     required this.type,
     required this.language,
@@ -14,6 +8,21 @@ class CodeArtifactModel extends EntityModel {
     required this.instructions,
     required this.variant,
   });
+
+  factory CodeArtifactModel.empty() {
+    return const CodeArtifactModel(
+      type: '',
+      language: '',
+      code: '',
+      instructions: '',
+      variant: '',
+    );
+  }
+  final String type;
+  final String language;
+  final String code;
+  final String instructions;
+  final String variant;
 
   @override
   EntityModel copyWith({
@@ -29,16 +38,6 @@ class CodeArtifactModel extends EntityModel {
       code: codeTmp ?? code,
       instructions: instructionsTmp ?? instructions,
       variant: variantTmp ?? variant,
-    );
-  }
-
-  factory CodeArtifactModel.empty() {
-    return const CodeArtifactModel(
-      type: '',
-      language: '',
-      code: '',
-      instructions: '',
-      variant: '',
     );
   }
 
@@ -62,13 +61,13 @@ class CodeArtifactModel extends EntityModel {
   @override
   int get hashCode => '$language$code'.hashCode;
 
-  static fromJson(Map<String, dynamic> json) {
+  static CodeArtifactModel fromJson(Map<String, dynamic> json) {
     return CodeArtifactModel(
-      type: json['type'] ?? '',
-      language: json['language'] ?? '',
-      code: json['code'] ?? '',
-      instructions: json['instructions'] ?? '',
-      variant: json['variant'] ?? '',
+      type: (json['type'] ?? '') as String,
+      language: (json['language'] ?? '') as String,
+      code: (json['code'] ?? '') as String,
+      instructions: (json['instructions'] ?? '') as String,
+      variant: (json['variant'] ?? '') as String,
     );
   }
 }

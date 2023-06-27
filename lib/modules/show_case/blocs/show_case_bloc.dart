@@ -1,15 +1,17 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/cli_commands.dart';
+
 import '../../../blocs/bloc_drawer.dart';
 import '../../../blocs/bloc_http.dart';
+import '../../../blocs/bloc_secondary_drawer.dart';
 import '../../../blocs/navigator_bloc.dart';
 import '../../../entities/entity_bloc.dart';
-import '../../../blocs/bloc_secondary_drawer.dart';
 import '../models/artifact_model.dart';
-import '../models/show_case_model.dart';
 import '../models/code_artifact_model.dart';
 import '../models/properties_artifact_model.dart';
+import '../models/show_case_model.dart';
 import '../models/use_artifact_model.dart';
 import '../models/variant_artifact_model.dart';
 import '../ui/pages/layout_page.dart';
@@ -90,7 +92,7 @@ class ShowCaseBloc extends BlocModule {
   }
 
   Widget secondaryOptionStartDesign() {
-    final focusNode = FocusNode();
+    final FocusNode focusNode = FocusNode();
     return Column(
       children: [
         SecondaryOptionMenu(
@@ -125,7 +127,7 @@ class ShowCaseBloc extends BlocModule {
   Widget secondaryOptionComponents() {
     return StreamBuilder(
       stream: listShowCaseModelStream,
-      builder: (context, data) {
+      builder: (BuildContext context, AsyncSnapshot<List<ShowCaseModel>> data) {
         if (listShowCaseModel.isEmpty) {
           return const Padding(
             padding: EdgeInsets.all(10.0),
@@ -137,7 +139,7 @@ class ShowCaseBloc extends BlocModule {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: listShowCaseModel.length,
           itemBuilder: (BuildContext context, int index) {
-            final showCase = listShowCaseModel[index];
+            final ShowCaseModel showCase = listShowCaseModel[index];
             return SecondaryOptionMenu(
               text: showCase.artifact.type.capitalize(),
               onTap: () {
@@ -181,12 +183,12 @@ class ShowCaseBloc extends BlocModule {
   }
 
   String? parseUrlValidFromDrive(String googleDriveUrl) {
-    RegExp regExp = RegExp(r'\/d\/([a-zA-Z0-9_-]+)');
-    Match match = regExp.firstMatch(googleDriveUrl) as Match;
+    final RegExp regExp = RegExp(r'\/d\/([a-zA-Z0-9_-]+)');
+    final Match match = regExp.firstMatch(googleDriveUrl)!;
 
     if (match.groupCount >= 1) {
-      String fileId = match.group(1) ?? '';
-      String imageUrl =
+      final String fileId = match.group(1) ?? '';
+      final String imageUrl =
           'https://drive.google.com/uc?export=download&id=$fileId';
       return imageUrl;
     } else {
@@ -196,12 +198,13 @@ class ShowCaseBloc extends BlocModule {
   }
 
   Future<void> getShowCaseData() async {
-    final response = await blocHttp.read(
-        url:
-            "https://script.google.com/macros/s/AKfycbxXVvtOw9NSH-zyruDPdnvlayyX2RleJ_HKvNGx_NQE7OEArcSlqBlNs_-uNa5JuNFT9A/exec");
-    final List data = response['data'];
-    List<ShowCaseModel> listShowCase = [];
-    for (var showcase in data) {
+    final Map<String, dynamic> response = await blocHttp.read(
+      url:
+          'https://script.google.com/macros/s/AKfycbxXVvtOw9NSH-zyruDPdnvlayyX2RleJ_HKvNGx_NQE7OEArcSlqBlNs_-uNa5JuNFT9A/exec',
+    );
+    final List<dynamic> data = response['data'] as List<dynamic>;
+    final List<ShowCaseModel> listShowCase = <ShowCaseModel>[];
+    for (final dynamic showcase in data) {
       late ArtifactModel artifactModel;
       late UseArtifactModel useArtifactModel;
       late List<CodeArtifactModel> codeArtifact;
@@ -214,25 +217,31 @@ class ShowCaseBloc extends BlocModule {
       final variants = showcase['variants'];
       final properties = showcase['properties'];
 
-      codeArtifact = [];
-      propertiesArtifact = [];
-      variantsArtifactModel = [];
-      artifactModel = ArtifactModel.fromJson(artifact);
-      useArtifactModel = UseArtifactModel.fromJson(use);
+      codeArtifact = <CodeArtifactModel>[];
+      propertiesArtifact = <PropertiesArtifactModel>[];
+      variantsArtifactModel = <VariantArtifactModel>[];
+      artifactModel = ArtifactModel.fromJson(artifact as Map<String, dynamic>);
+      useArtifactModel = UseArtifactModel.fromJson(use as Map<String, dynamic>);
 
-      for (var code in codes) {
-        codeArtifact.add(CodeArtifactModel.fromJson(code));
+      for (final dynamic code in codes as List<dynamic>) {
+        codeArtifact
+            .add(CodeArtifactModel.fromJson(code as Map<String, dynamic>));
       }
-      for (var property in properties) {
-        propertiesArtifact.add(PropertiesArtifactModel.fromJson(property));
+      for (final dynamic property in properties as List<dynamic>) {
+        propertiesArtifact.add(
+          PropertiesArtifactModel.fromJson(property as Map<String, dynamic>),
+        );
       }
-      for (var variant in variants) {
-        List<CodeArtifactModel> newCodes = [];
-        for (var code in variant['codes']) {
-          newCodes.add(CodeArtifactModel.fromJson(code));
+      for (final dynamic variant in variants as List<dynamic>) {
+        final List<CodeArtifactModel> newCodes = <CodeArtifactModel>[];
+        for (final dynamic code in variant['codes'] as List<dynamic>) {
+          newCodes
+              .add(CodeArtifactModel.fromJson(code as Map<String, dynamic>));
         }
         variant['codes'] = newCodes;
-        variantsArtifactModel.add(VariantArtifactModel.fromJson(variant));
+        variantsArtifactModel.add(
+          VariantArtifactModel.fromJson(variant as Map<String, dynamic>),
+        );
       }
       listShowCase.add(
         ShowCaseModel(

@@ -6,7 +6,7 @@ void main() {
     testWidgets('onPressed is called when ListTile is tapped',
         (WidgetTester tester) async {
       const Key key = Key('listTileWidget');
-      bool onPressedCalled = false;
+      const bool onPressedCalled = false;
       await tester.pumpWidget(
         const MaterialApp(
           home: Material(

@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:aleteo_arquetipo/entities/entity_bloc.dart';
+import '../../../entities/entity_bloc.dart';
 
 class TemplateShowCaseBloc extends BlocModule {
-  static const String name = 'templateShowCaseBloc';
-
-  late BlocGeneral<bool> _showCodeArtifact;
 
   TemplateShowCaseBloc() {
     _showCodeArtifact = BlocGeneral<bool>(false);
   }
+  static const String name = 'templateShowCaseBloc';
+
+  late BlocGeneral<bool> _showCodeArtifact;
 
   bool get showCodeArtifact => _showCodeArtifact.value;
   Stream<bool> get showCodeArtifactStream => _showCodeArtifact.stream;

@@ -1,13 +1,14 @@
-import 'package:aleteo_arquetipo/modules/show_case/models/properties_artifact_model.dart';
-import 'package:aleteo_arquetipo/modules/show_case/ui/widgets/button.dart';
-import 'package:aleteo_arquetipo/ui/widgets/responsive/my_app_scaffold_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../ui/widgets/forms/custom_autocomplete_input_widget.dart';
+import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
 import '../../blocs/create_artifact_bloc.dart';
+import '../../models/code_artifact_model.dart';
+import '../../models/properties_artifact_model.dart';
+import '../widgets/button.dart';
 
 class FormPropertiesArtifact extends StatelessWidget {
-  const FormPropertiesArtifact({super.key, required this.createArtifactBloc});
+  const FormPropertiesArtifact({required this.createArtifactBloc, super.key});
   final CreateArtifactBloc createArtifactBloc;
   @override
   Widget build(BuildContext context) {
@@ -16,55 +17,51 @@ class FormPropertiesArtifact extends StatelessWidget {
     String description = '';
     String defaultValue = '';
     return MyAppScaffold(
-      withAppbar: true,
-      withMargin: true,
       child: Padding(
         padding: const EdgeInsets.all(30.0),
         child: SingleChildScrollView(
           child: Column(
-            children: [
-              DropdownButtonFormField(
-                items: createArtifactBloc.listCodeArtifactModel.map((e) {
+            children: <Widget>[
+              DropdownButtonFormField<String>(
+                items: createArtifactBloc.listCodeArtifactModel
+                    .map((CodeArtifactModel e) {
                   /// Ahora creamos "e" y contiene cada uno de los items de la lista.
-                  return DropdownMenuItem(
+                  return DropdownMenuItem<String>(
                     value: e.language,
                     child: Text(e.language),
                   );
                 }).toList(),
-                onChanged: (value) => language = value ?? '',
+                onChanged: (String? value) => language = value ?? '',
               ),
               CustomAutoCompleteInputWidget(
                 label: 'Name',
-                onEditingValueFunction: (val) {
+                onEditingValueFunction: (String val) {
                   name = val;
                 },
-                onEditingValidateFunction: (val) {
-                  String? messageError =
+                onEditingValidateFunction: (String val) {
+                  final String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
-                textInputType: TextInputType.text,
               ),
               CustomAutoCompleteInputWidget(
                 label: 'Description',
-                onEditingValueFunction: (val) {
-                   description = val;
+                onEditingValueFunction: (String val) {
+                  description = val;
                 },
-                textInputType: TextInputType.text,
-                onEditingValidateFunction: (val) {
-                  String? messageError =
+                onEditingValidateFunction: (String val) {
+                  final String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
               ),
               CustomAutoCompleteInputWidget(
                 label: 'Default Value',
-                onEditingValueFunction: (val) {
-                   defaultValue = val;
+                onEditingValueFunction: (String val) {
+                  defaultValue = val;
                 },
-                textInputType: TextInputType.text,
-                onEditingValidateFunction: (val) {
-                  String? messageError =
+                onEditingValidateFunction: (String val) {
+                  final String? messageError =
                       createArtifactBloc.validateForm('string', val, true);
                   return messageError;
                 },
@@ -72,7 +69,7 @@ class FormPropertiesArtifact extends StatelessWidget {
               Button(
                 title: 'Agregar',
                 onPressed: () {
-                  PropertiesArtifactModel propertiesArtifactModel =
+                  final PropertiesArtifactModel propertiesArtifactModel =
                       PropertiesArtifactModel(
                     type: createArtifactBloc.title,
                     name: name,
@@ -80,29 +77,29 @@ class FormPropertiesArtifact extends StatelessWidget {
                     description: description,
                     language: language,
                   );
-                  
+
                   createArtifactBloc.addProperties(propertiesArtifactModel);
                 },
               ),
-              
               const Divider(),
               const Text('Propiedades agregadas'),
-              StreamBuilder(
-                  stream: createArtifactBloc.listPropertiesArtifactModelStream,
-                  builder: (BuildContext context, AsyncSnapshot data) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount:
-                          createArtifactBloc.listPropertiesArtifactModel.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final property =
-                            createArtifactBloc.listPropertiesArtifactModel[index];
-                        return ListTile(
-                          title: Text('${property.language} : ${property.name}'),
-                        );
-                      },
-                    );
-                  }),
+              StreamBuilder<List<PropertiesArtifactModel>>(
+                stream: createArtifactBloc.listPropertiesArtifactModelStream,
+                builder: (BuildContext context, AsyncSnapshot<dynamic> data) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount:
+                        createArtifactBloc.listPropertiesArtifactModel.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final PropertiesArtifactModel property =
+                          createArtifactBloc.listPropertiesArtifactModel[index];
+                      return ListTile(
+                        title: Text('${property.language} : ${property.name}'),
+                      );
+                    },
+                  );
+                },
+              ),
               Button(
                 title: 'Guardar',
                 onPressed: () {

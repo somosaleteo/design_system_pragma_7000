@@ -52,12 +52,10 @@ class LibraryLayoutDesignSystem extends StatelessWidget {
             color: const Color(0xff6429CD).withOpacity(0.1),
             border: Border.all(
               color: const Color(0xff6429CD),
-              width: 1,
             ),
             borderRadius: BorderRadius.circular(25),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 margin: const EdgeInsets.fromLTRB(23, 23, 12, 53),
@@ -110,7 +108,6 @@ class LibraryLayoutDesignSystem extends StatelessWidget {
               width: 15,
               height: 3,
               decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(25),
               ),
@@ -127,7 +124,6 @@ class LibraryLayoutDesignSystem extends StatelessWidget {
               width: 15,
               height: 3,
               decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(25),
               ),

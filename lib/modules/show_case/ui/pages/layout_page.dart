@@ -1,8 +1,8 @@
-import 'package:aleteo_arquetipo/modules/show_case/ui/widgets/library_layout_design_system.dart';
-import 'package:aleteo_arquetipo/ui/widgets/responsive/my_app_scaffold_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../ui/widgets/responsive/my_app_scaffold_widget.dart';
 import '../widgets/feedback_widget.dart';
+import '../widgets/library_layout_design_system.dart';
 
 class LayoutPage extends StatelessWidget {
   const LayoutPage({super.key});

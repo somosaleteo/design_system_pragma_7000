@@ -5,7 +5,7 @@ import 'property.dart';
 
 class PropertiesList extends StatelessWidget {
   const PropertiesList(
-      {super.key, required this.properties, required this.showCaseBloc});
+      {required this.properties, required this.showCaseBloc, super.key,});
   final List<PropertiesArtifactModel> properties;
   final ShowCaseBloc showCaseBloc;
   @override
@@ -15,16 +15,14 @@ class PropertiesList extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<String> data) {
           return ListView.builder(
             shrinkWrap: true,
-            scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: properties.length,
-            itemBuilder: (context, index) {
-              final property = properties[index];
+            itemBuilder: (BuildContext context, int index) {
+              final PropertiesArtifactModel property = properties[index];
               return showCaseBloc.activeLanguage == property.language
                   ? Column(
                       children: [
                         Row(
-                          mainAxisSize: MainAxisSize.max,
                           children: [
                             Property(text: property.name),
                             Property(text: property.description),
@@ -37,6 +35,6 @@ class PropertiesList extends StatelessWidget {
                   : const SizedBox.shrink();
             },
           );
-        });
+        },);
   }
 }
