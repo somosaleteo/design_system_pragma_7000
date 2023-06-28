@@ -35,12 +35,12 @@ class CodeList extends StatelessWidget {
                   itemCount: codes.length,
                   itemBuilder: (BuildContext context, int index) {
                     final String codeKey = codes[index].language;
-                    //final String code = codes[index].code;
+                    final String code = codes[index].code;
                     return InkWell(
                       autofocus: true,
                       onTap: () {
-                        showCaseBloc.activeLanguage = codes.first.language;
-                        showCaseBloc.activeCode = codes.first.code;
+                        showCaseBloc.activeLanguage = codeKey;
+                        showCaseBloc.activeCode = code;
                       },
                       child: DecoratedBox(
                         decoration: BoxDecoration(
