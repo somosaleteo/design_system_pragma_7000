@@ -46,13 +46,16 @@ class BlocHttp extends BlocModule {
     return response;
   }
 
-  update() {}
-  delete() {}
+  void update() {}
+  void delete() {}
 
   bool hasDataError(Map<String, dynamic> data) {
-    final bool isMap =
-        data['data'].runtimeType.toString() == '_Map<String, dynamic>';
-    return isMap && data['data'].containsKey('error') as bool;
+    if (data['data'] is Map<String, dynamic>) {
+      final Map<String, dynamic> dataMap = data['data'] as Map<String, dynamic>;
+      return dataMap.containsKey('error');
+    } else {
+      return false;
+    }
   }
 
   @override

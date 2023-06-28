@@ -16,7 +16,7 @@ class LayoutPage extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Column(
-              children: [
+              children: <Widget>[
                 LibraryLayoutDesignSystem(),
                 FeedbackWidget(mainColor: mainColor),
               ],

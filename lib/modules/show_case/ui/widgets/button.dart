@@ -33,7 +33,7 @@ class Button extends StatelessWidget {
         height: height ?? 40,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+          children: <Widget>[
             if (iconData != null) Icon(iconData),
             Text(
               title ?? 'Button',

@@ -18,6 +18,7 @@ class ThemeBloc extends BlocModule {
   late bool _isThemeLight;
 
   ThemeData get theme => _themeService.theme;
+  // ignore: unnecessary_getters_setters
   bool get isThemeLight => _isThemeLight;
 
   set theme(ThemeData themeData) {

@@ -10,8 +10,8 @@ class CodeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    showCaseBloc.switchActiveLanguage(codes.first.language);
-    showCaseBloc.switchActiveCode(codes.first.code);
+    showCaseBloc.activeLanguage = codes.first.language;
+    showCaseBloc.activeCode = codes.first.code;
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -35,12 +35,12 @@ class CodeList extends StatelessWidget {
                   itemCount: codes.length,
                   itemBuilder: (BuildContext context, int index) {
                     final String codeKey = codes[index].language;
-                    final String code = codes[index].code;
+                    //final String code = codes[index].code;
                     return InkWell(
                       autofocus: true,
                       onTap: () {
-                        showCaseBloc.switchActiveLanguage(codeKey);
-                        showCaseBloc.switchActiveCode(code);
+                        showCaseBloc.activeLanguage = codes.first.language;
+                        showCaseBloc.activeCode = codes.first.code;
                       },
                       child: DecoratedBox(
                         decoration: BoxDecoration(

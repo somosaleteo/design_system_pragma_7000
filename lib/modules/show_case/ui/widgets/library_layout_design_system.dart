@@ -8,7 +8,7 @@ class LibraryLayoutDesignSystem extends StatelessWidget {
     const Color mainColor = Color(0xFF330072);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         const Text(
           'Empieza a usar la librería',
           style: TextStyle(
@@ -56,7 +56,7 @@ class LibraryLayoutDesignSystem extends StatelessWidget {
             borderRadius: BorderRadius.circular(25),
           ),
           child: Row(
-            children: [
+            children: <Widget>[
               Container(
                 margin: const EdgeInsets.fromLTRB(23, 23, 12, 53),
                 child: const Icon(Icons.error_outline),
@@ -101,7 +101,7 @@ class LibraryLayoutDesignSystem extends StatelessWidget {
         const SizedBox(height: 30),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Container(
               padding: EdgeInsets.zero,
               margin: EdgeInsets.zero,

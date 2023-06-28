@@ -28,7 +28,7 @@ class DrawerOptionWidget extends StatelessWidget {
       shape: const Border(),
       childrenPadding: const EdgeInsets.only(left: 25.0),
       initiallyExpanded: isExpanded ?? false,
-      children: [secondaryOption],
+      children: <Widget>[secondaryOption],
     );
 
     /*ListTile(

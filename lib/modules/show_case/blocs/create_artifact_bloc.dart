@@ -65,8 +65,8 @@ class CreateArtifactBloc extends BlocModule {
   }
 
   void clearShowCaseModel() {
-    _listCodeArtifactModel.value = [];
-    _listPropertiesArtifactModel.value = [];
+    _listCodeArtifactModel.value = <CodeArtifactModel>[];
+    _listPropertiesArtifactModel.value = <PropertiesArtifactModel>[];
   }
 
   bool existsLanguage(String language) {
@@ -109,7 +109,7 @@ class CreateArtifactBloc extends BlocModule {
         in listPropertiesArtifactModel) {
       listProperties.add(property.toJson());
     }
-    final Map<String, dynamic> body = {
+    final Map<String, dynamic> body = <String, dynamic>{
       'ShowCaseModel': <String, Object>{
         'title': title,
         'Artifact': artifactModel.toJson(),

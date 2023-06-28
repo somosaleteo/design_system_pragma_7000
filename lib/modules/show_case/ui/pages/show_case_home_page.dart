@@ -12,7 +12,12 @@ import 'form_artifact_page.dart';
 
 class ShowCaseHomePage extends StatelessWidget {
   const ShowCaseHomePage({
-    required this.showCaseBloc, required this.createArtifactBloc, required this.templateShowCaseBloc, required this.navigatorBloc, required this.themeBloc, super.key,
+    required this.showCaseBloc,
+    required this.createArtifactBloc,
+    required this.templateShowCaseBloc,
+    required this.navigatorBloc,
+    required this.themeBloc,
+    super.key,
   });
 
   final ShowCaseBloc showCaseBloc;
@@ -25,7 +30,7 @@ class ShowCaseHomePage extends StatelessWidget {
     showCaseBloc.getShowCaseData();
     return MyAppScaffold(
       child: Column(
-        children: [
+        children: <Widget>[
           Align(
             alignment: Alignment.topRight,
             child: Padding(

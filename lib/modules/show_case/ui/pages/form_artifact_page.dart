@@ -22,24 +22,23 @@ class FormArtifact extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
-          children: [
+          children: <Widget>[
             CustomAutoCompleteInputWidget(
               label: 'Title',
               onEditingValueFunction: (String val) {
                 createArtifactBloc.title = val;
               },
               onEditingValidateFunction: (String val) {
-                String? messageError =
+                final String? messageError =
                     createArtifactBloc.validateForm('String', val, true);
                 return messageError;
               },
             ),
             CustomAutoCompleteInputWidget(
               label: 'Width',
-              onEditingValueFunction: (String val) {
-              },
+              onEditingValueFunction: (String val) {},
               onEditingValidateFunction: (String val) {
-                String? messageError =
+                final String? messageError =
                     createArtifactBloc.validateForm('number', val, true);
                 return messageError;
               },
@@ -47,10 +46,9 @@ class FormArtifact extends StatelessWidget {
             ),
             CustomAutoCompleteInputWidget(
               label: 'Height',
-              onEditingValueFunction: (String val) {
-              },
+              onEditingValueFunction: (String val) {},
               onEditingValidateFunction: (String val) {
-                String? messageError =
+                final String? messageError =
                     createArtifactBloc.validateForm('number', val, true);
                 return messageError;
               },
@@ -58,10 +56,9 @@ class FormArtifact extends StatelessWidget {
             ),
             CustomAutoCompleteInputWidget(
               label: 'Radius',
-              onEditingValueFunction: (String val) {
-              },
+              onEditingValueFunction: (String val) {},
               onEditingValidateFunction: (String val) {
-                String? messageError =
+                final String? messageError =
                     createArtifactBloc.validateForm('number', val, true);
                 return messageError;
               },
@@ -73,7 +70,7 @@ class FormArtifact extends StatelessWidget {
                 image = val;
               },
               onEditingValidateFunction: (String val) {
-                String? messageError =
+                final String? messageError =
                     createArtifactBloc.validateForm('number', val, true);
                 return messageError;
               },

@@ -14,7 +14,7 @@ class VariantArtifactModel extends EntityModel {
     return const VariantArtifactModel(
       type: '',
       description: '',
-      codes: [],
+      codes: <CodeArtifactModel>[],
       image: '',
       name: '',
     );

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class MenuHeader extends StatelessWidget {
@@ -7,10 +6,10 @@ class MenuHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Image.asset('assets/logo.png'),
             const SizedBox(width: 10.0),
             const Text(

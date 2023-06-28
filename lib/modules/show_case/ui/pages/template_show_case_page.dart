@@ -298,7 +298,7 @@ class CodeWidget extends StatelessWidget {
                 height: 250,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: CachedNetworkImage(

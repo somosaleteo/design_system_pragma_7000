@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class FeedbackWidget extends StatelessWidget {
   const FeedbackWidget({
-    required this.mainColor, super.key,
+    required this.mainColor,
+    super.key,
   });
 
   final Color mainColor;
@@ -11,7 +12,7 @@ class FeedbackWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         Text(
           'Feedback',
           style: TextStyle(
@@ -28,11 +29,12 @@ class FeedbackWidget extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: mainColor,
             ),
-            children: const [
+            children: const <InlineSpan>[
               TextSpan(
-                  text:
-                      'El design system es de todos y eres parte de la solución,',
-                  style: TextStyle(fontWeight: FontWeight.bold),),
+                text:
+                    'El design system es de todos y eres parte de la solución,',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               TextSpan(
                 text:
                     ' si identificas una oportunidad de mejora o un componente que no está en la librería siéntete libre de proponerlo.',
@@ -55,7 +57,8 @@ class FeedbackWidget extends StatelessWidget {
               ),
             ),
             foregroundColor: MaterialStateProperty.all<Color>(
-                Theme.of(context).colorScheme.primary,),
+              Theme.of(context).colorScheme.primary,
+            ),
           ),
           onPressed: () {},
           child: const Text(
@@ -74,10 +77,11 @@ class FeedbackWidget extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: mainColor,
             ),
-            children: const [
+            children: const <InlineSpan>[
               TextSpan(
-                  text:
-                      'Puedes contactar el equipo del Design System a través del correo si necesitas ayuda ',),
+                text:
+                    'Puedes contactar el equipo del Design System a través del correo si necesitas ayuda ',
+              ),
               TextSpan(
                 text: 'design.system@pragma.com.co',
                 style: TextStyle(decoration: TextDecoration.underline),

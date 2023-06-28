@@ -48,19 +48,13 @@ class ShowCaseBloc extends BlocModule {
   Stream<List<ShowCaseModel>> get listShowCaseModelStream =>
       _listShowCaseModel.stream;
 
-  String get activeLanguage => _activeLanguage.value;
   Stream<String> get activeLanguageStream => _activeLanguage.stream;
+  String get activeLanguage => _activeLanguage.value;
+  set activeLanguage(String language) => _activeLanguage.value = language;
 
-  String get activeCode => _activeCode.value;
   Stream<String> get activeCodeStream => _activeCode.stream;
-
-  void switchActiveLanguage(String language) {
-    _activeLanguage.value = language;
-  }
-
-  void switchActiveCode(String code) {
-    _activeCode.value = code;
-  }
+  String get activeCode => _activeCode.value;
+  set activeCode(String code) => _activeCode.value = code;
 
   void addSecondaryDrawerOptionMenu({
     required void Function() onPressed,
@@ -204,45 +198,55 @@ class ShowCaseBloc extends BlocModule {
     );
     final List<dynamic> data = response['data'] as List<dynamic>;
     final List<ShowCaseModel> listShowCase = <ShowCaseModel>[];
-    for (final dynamic showcase in data) {
+    for (final Map<String, dynamic> showcase
+        in data.cast<Map<String, dynamic>>()) {
       late ArtifactModel artifactModel;
       late UseArtifactModel useArtifactModel;
       late List<CodeArtifactModel> codeArtifact;
       late List<VariantArtifactModel> variantsArtifactModel;
       late List<PropertiesArtifactModel> propertiesArtifact;
 
-      final dynamic artifact = showcase['artifact'];
-      final use = showcase['use'];
-      final codes = showcase['codes'];
-      final variants = showcase['variants'];
-      final properties = showcase['properties'];
+      final Map<String, dynamic> artifact =
+          showcase['artifact'] as Map<String, dynamic>;
+      final Map<String, dynamic> use = showcase['use'] as Map<String, dynamic>;
+
+      final List<Map<String, dynamic>> codes =
+          (showcase['codes'] as List<dynamic>).cast<Map<String, dynamic>>();
+
+      final List<Map<String, dynamic>> variants =
+          (showcase['variants'] as List<dynamic>).cast<Map<String, dynamic>>();
+
+      final List<Map<String, dynamic>> properties =
+          (showcase['properties'] as List<dynamic>)
+              .cast<Map<String, dynamic>>();
 
       codeArtifact = <CodeArtifactModel>[];
       propertiesArtifact = <PropertiesArtifactModel>[];
       variantsArtifactModel = <VariantArtifactModel>[];
-      artifactModel = ArtifactModel.fromJson(artifact as Map<String, dynamic>);
-      useArtifactModel = UseArtifactModel.fromJson(use as Map<String, dynamic>);
+      artifactModel = ArtifactModel.fromJson(artifact);
+      useArtifactModel = UseArtifactModel.fromJson(use);
 
-      for (final dynamic code in codes as List<dynamic>) {
-        codeArtifact
-            .add(CodeArtifactModel.fromJson(code as Map<String, dynamic>));
+      for (final Map<String, dynamic> code in codes) {
+        codeArtifact.add(CodeArtifactModel.fromJson(code));
       }
-      for (final dynamic property in properties as List<dynamic>) {
-        propertiesArtifact.add(
-          PropertiesArtifactModel.fromJson(property as Map<String, dynamic>),
-        );
+
+      for (final Map<String, dynamic> property in properties) {
+        propertiesArtifact.add(PropertiesArtifactModel.fromJson(property));
       }
-      for (final dynamic variant in variants as List<dynamic>) {
+
+      for (final Map<String, dynamic> variant in variants) {
         final List<CodeArtifactModel> newCodes = <CodeArtifactModel>[];
-        for (final dynamic code in variant['codes'] as List<dynamic>) {
-          newCodes
-              .add(CodeArtifactModel.fromJson(code as Map<String, dynamic>));
+
+        for (final Map<String, dynamic> code
+            in (variant['codes'] as List<dynamic>)
+                .cast<Map<String, dynamic>>()) {
+          newCodes.add(CodeArtifactModel.fromJson(code));
         }
+
         variant['codes'] = newCodes;
-        variantsArtifactModel.add(
-          VariantArtifactModel.fromJson(variant as Map<String, dynamic>),
-        );
+        variantsArtifactModel.add(VariantArtifactModel.fromJson(variant));
       }
+
       listShowCase.add(
         ShowCaseModel(
           artifact: artifactModel,

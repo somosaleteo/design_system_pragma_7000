@@ -16,10 +16,10 @@ class ShowCaseModel {
   factory ShowCaseModel.empty() {
     return ShowCaseModel(
       artifact: ArtifactModel.empty(),
-      codeArtifact: [],
-      propertiesArtifact: [],
+      codeArtifact: <CodeArtifactModel>[],
+      propertiesArtifact: <PropertiesArtifactModel>[],
       useArtifactModel: UseArtifactModel.empty(),
-      varianstArtifactModel: [],
+      varianstArtifactModel: <VariantArtifactModel>[],
     );
   }
   final ArtifactModel artifact;
