@@ -64,6 +64,7 @@ class TemplateShowCase extends StatelessWidget {
               imageDefault: imageDefault,
               image: urlImageDrive,
               codes: showCaseModel.codeArtifact,
+              index: 0,
               showCaseBloc: showCaseBloc,
             ),
             const SizedBox(height: 15.0),
@@ -187,6 +188,7 @@ class TemplateShowCase extends StatelessWidget {
                         imageDefault: imageDefault,
                         showCaseBloc: showCaseBloc,
                         codes: variantArtifactModel.codes,
+                        index: index + 1,
                         image: showCaseBloc
                             .parseUrlValidFromDrive(variantArtifactModel.image),
                       )
@@ -264,6 +266,7 @@ class CodeWidget extends StatelessWidget {
     required this.imageDefault,
     required this.showCaseBloc,
     required this.codes,
+    required this.index,
     super.key,
     this.image,
   });
@@ -273,13 +276,14 @@ class CodeWidget extends StatelessWidget {
   final List<CodeArtifactModel> codes;
   final ShowCaseBloc showCaseBloc;
   final String? image;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<bool>(
-      stream: templateShowCaseBloc.showCodeArtifactStream,
+      stream: templateShowCaseBloc.getShowCodeArtifactStream(index),
       builder: (BuildContext context, AsyncSnapshot<dynamic> data) {
-        final bool showCode = templateShowCaseBloc.showCodeArtifact;
+        final bool showCode = data.data as bool? ?? false;
         return Column(
           children: <Widget>[
             DecoratedBox(
@@ -310,7 +314,7 @@ class CodeWidget extends StatelessWidget {
                     const Divider(),
                     InkWell(
                       onTap: () {
-                        templateShowCaseBloc.switchShowCodeArtifact();
+                        templateShowCaseBloc.switchShowCodeArtifact(index);
                       },
                       child: const SizedBox(
                         width: double.infinity,
